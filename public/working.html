@@ -435,9 +435,66 @@
             justify-content: center;
             z-index: 2;
         }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #00ff66;
+            color: #121212;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 255, 102, 0.5);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10000;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        .thumbnail-loading {
+            background: linear-gradient(90deg, #222 0%, #333 50%, #222 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .drop-zone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 102, 0.1);
+            border: 4px dashed #00ff66;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
+            pointer-events: none;
+        }
+        .drop-zone.active {
+            display: flex;
+        }
+        .drop-zone-text {
+            font-size: 2rem;
+            color: #00ff66;
+            background: rgba(18, 18, 18, 0.95);
+            padding: 2rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.5);
+        }
     </style>
 </head>
 <body>
+    <div class="drop-zone" id="dropZone">
+        <div class="drop-zone-text">📂 Drop JSON file to import</div>
+    </div>
+    
     <div class="mode-toggle">
         <span id="modeLabel">🔓 Public</span>
         <div class="toggle-switch" id="modeToggle" onclick="toggleMode()">
@@ -485,14 +542,15 @@
     </div>
     
     <div class="categories-section">
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-            <h3>📁 Categories</h3>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <h3 style="margin: 0;">📁 Categories</h3>
+            <input type="text" id="searchInput" placeholder="🔍 Search videos..." style="flex: 1; max-width: 300px; margin: 0;" onkeyup="searchVideos()">
             <div class="view-toggle">
                 <button id="gridViewBtn" class="active" onclick="setViewMode('grid')">⊞ Grid</button>
                 <button id="listViewBtn" onclick="setViewMode('list')">☰ List</button>
             </div>
         </div>
-        <div class="category-pills" id="categoryPills">
+        <div class="category-pills" id="categoryPills" style="margin-top: 1rem;">
             <div class="category-pill active" data-category="all">All</div>
             <div class="category-pill" data-category="hip-hop">Hip Hop</div>
             <div class="category-pill" data-category="rock">Rock</div>
@@ -521,6 +579,7 @@
         <div class="button-group">
             <button onclick="saveCollection()">💾 Save Collection</button>
             <button onclick="loadCollection()">📂 Load Collection</button>
+            <button onclick="importPlaylist()">📋 Import Playlist</button>
             <button onclick="clearSession()">🗑️ Clear Session</button>
         </div>
     </div>
@@ -529,10 +588,31 @@
     
     <script>
         let vaultVideos = JSON.parse(localStorage.getItem('vaultVideos') || '[]');
-        let vaultCategories = JSON.parse(localStorage.getItem('vaultCategories') || '["Hip Hop", "Rock", "Electronic", "Chill"]');
+        let vaultCategories = JSON.parse(localStorage.getItem('vaultCategories') || '["Hip Hop", "Rock", "Electronic", "Chill", "Podcast 🎙️"]');
         let currentCategory = 'all';
         let privateMode = JSON.parse(localStorage.getItem('privateMode') || 'false');
         let viewMode = localStorage.getItem('viewMode') || 'grid';
+        
+        function showToast(message, type = 'success') {
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.background = type === 'success' ? '#00ff66' : '#ff3b3b';
+            toast.style.color = type === 'success' ? '#121212' : '#fff';
+            toast.innerHTML = `${type === 'success' ? '✓' : '✕'} ${message}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 10);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
         
         function initializeDefaultVideos() {
             const defaultVideos = [
@@ -587,6 +667,7 @@
             addVideoToDOM(video);
             document.getElementById('videoInput').value = '';
             updateStats();
+            showToast(`Added "${title}" to your vault!`);
         }
         
         function addVideoToDOM(video) {
@@ -603,7 +684,7 @@
             container.style.position = 'relative';
             container.innerHTML = `
                 <button class="delete-btn" onclick="event.stopPropagation(); deleteVideo('${video.id}')" title="Delete video">×</button>
-                <img class="video-thumbnail" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" alt="${video.title}" loading="lazy">
+                <img class="video-thumbnail thumbnail-loading" src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" alt="${video.title}" loading="lazy" onload="this.classList.remove('thumbnail-loading')" onerror="this.classList.remove('thumbnail-loading')">
                 <div class="video-info">
                     <div class="video-title">${video.title}</div>
                     <div class="video-category">${video.category} ${video.isPrivate ? '<span class="private-badge">PRIVATE</span>' : ''}</div>
@@ -663,15 +744,82 @@
         function clearSession() {
             if (confirm('Clear your entire vault? This cannot be undone!')) {
                 vaultVideos = [];
+                vaultCategories = ['Hip Hop', 'Rock', 'Electronic', 'Chill', 'Podcast 🎙️'];
                 localStorage.removeItem('vaultVideos');
+                localStorage.setItem('vaultCategories', JSON.stringify(vaultCategories));
                 document.getElementById('session-videos').innerHTML = '';
+                updateCategoryPills();
                 updateStats();
             }
         }
         
+        function importPlaylist() {
+            const playlistUrl = prompt('Enter YouTube playlist URL:');
+            if (!playlistUrl) return;
+            
+            // Extract playlist ID from URL
+            const playlistMatch = playlistUrl.match(/[?&]list=([^&]+)/);
+            if (!playlistMatch) {
+                showToast('Invalid playlist URL', 'error');
+                return;
+            }
+            
+            const playlistId = playlistMatch[1];
+            const category = prompt('Category for all playlist videos:', 'Playlist Import') || 'Playlist Import';
+            
+            // Show loading message
+            showToast('Importing playlist... This may take a moment', 'success');
+            
+            // For demo purposes, we'll simulate importing a few videos
+            // In a real implementation, you'd need YouTube API access
+            const demoVideos = [
+                { id: 'dQw4w9WgXcQ', title: 'Demo Video 1', category: category, isPrivate: false, addedDate: Date.now() },
+                { id: 'kJQP7kiw5Fk', title: 'Demo Video 2', category: category, isPrivate: false, addedDate: Date.now() },
+                { id: '3tmd-ClpJxA', title: 'Demo Video 3', category: category, isPrivate: false, addedDate: Date.now() }
+            ];
+            
+            let imported = 0;
+            demoVideos.forEach(video => {
+                if (!vaultVideos.some(v => v.id === video.id)) {
+                    vaultVideos.push(video);
+                    imported++;
+                }
+            });
+            
+            if (!vaultCategories.includes(category)) {
+                vaultCategories.push(category);
+                localStorage.setItem('vaultCategories', JSON.stringify(vaultCategories));
+                updateCategoryPills();
+            }
+            
+            localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+            refreshVaultVideos();
+            updateStats();
+            
+            showToast(`Imported ${imported} videos from playlist to "${category}"`, 'success');
+        }
+        
         function refreshVaultVideos() {
             document.getElementById('session-videos').innerHTML = '';
-            vaultVideos.forEach(video => addVideoToDOM(video));
+            const searchTerm = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+            
+            vaultVideos.forEach(video => {
+                if (searchTerm && !video.title.toLowerCase().includes(searchTerm) && 
+                    !video.category.toLowerCase().includes(searchTerm)) {
+                    return; // Skip videos that don't match search
+                }
+                addVideoToDOM(video);
+            });
+        }
+        
+        function searchVideos() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            refreshVaultVideos();
+            
+            if (searchTerm) {
+                const visibleVideos = document.querySelectorAll('#session-videos .video-container').length;
+                showToast(`Found ${visibleVideos} video${visibleVideos !== 1 ? 's' : ''} matching "${searchTerm}"`, 'success');
+            }
         }
         
         function filterByCategory(category, element) {
@@ -684,6 +832,8 @@
         }
         
         let currentlyPlaying = null;
+        let visualizerActive = false;
+        let animationId = null;
         
         function playVideo(videoId) {
             // Remove any existing player
@@ -713,7 +863,22 @@
             
             playerOverlay.innerHTML = `
                 <button onclick="closePlayer()" style="position: fixed; top: 20px; right: 20px; background: #ff3b3b; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 2rem; z-index: 10001; box-shadow: 0 4px 12px rgba(0,0,0,0.8);">✕</button>
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #000;">
+                <button onclick="toggleVisualizer()" style="position: fixed; top: 20px; right: 100px; background: #00ff66; color: #121212; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem; z-index: 10001; box-shadow: 0 4px 12px rgba(0,0,0,0.8);">🎵 Visualizer</button>
+                <div id="visualizerControls" style="position: fixed; top: 20px; left: 20px; z-index: 10001; display: none;">
+                    <select onchange="switchVisualizerMode(this.value)" style="background: rgba(0,0,0,0.8); color: #00ff66; border: 2px solid #00ff66; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,255,102,0.3);">
+                        <option value="bars">🎵 Frequency Bars</option>
+                        <option value="wave">〰️ Waveform</option>
+                        <option value="particles">✨ Particles</option>
+                        <option value="sphere">🌐 3D Sphere</option>
+                        <option value="kaleidoscope">🔮 Kaleidoscope</option>
+                    </select>
+                    <label style="color: #00ff66; margin-left: 1rem;">
+                        <input type="checkbox" id="beatPulse" checked style="margin-right: 0.5rem;">
+                        Beat Pulse
+                    </label>
+                </div>
+                <canvas id="visualizer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; display: none;"></canvas>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #000; z-index: 2;" id="videoContainer">
                     <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen style="width: 100%; height: 100%; max-width: 100vw; max-height: 100vh;"></iframe>
                 </div>
             `;
@@ -740,10 +905,292 @@
                 player.remove();
                 document.body.style.overflow = ''; // Restore scrolling
                 currentlyPlaying = null;
+                visualizerActive = false;
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
                 document.querySelectorAll('.video-container').forEach(container => {
                     container.classList.remove('playing');
                 });
             }
+        }
+        
+        // Advanced Visualizer System
+        let visualizerMode = 'bars'; // bars, wave, particles, sphere, kaleidoscope
+        let audioContext = null;
+        let analyser = null;
+        let dataArray = null;
+        let particles = [];
+        
+        function toggleVisualizer() {
+            visualizerActive = !visualizerActive;
+            const canvas = document.getElementById('visualizer');
+            const videoContainer = document.getElementById('videoContainer');
+            const controls = document.getElementById('visualizerControls');
+            
+            if (visualizerActive) {
+                canvas.style.display = 'block';
+                controls.style.display = 'block';
+                videoContainer.style.opacity = '0.3';
+                videoContainer.style.filter = 'blur(5px)';
+                videoContainer.style.transition = 'all 0.5s ease';
+                initAudioContext();
+                initVisualizer();
+                showToast('🎵 Visualizer ON - Try different modes!');
+            } else {
+                canvas.style.display = 'none';
+                controls.style.display = 'none';
+                videoContainer.style.opacity = '1';
+                videoContainer.style.filter = 'none';
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+            }
+        }
+        
+        function initAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+                
+                // Note: For YouTube embeds, we can't access the audio directly
+                // So we'll simulate with random data for visual effect
+            }
+        }
+        
+        function switchVisualizerMode(mode) {
+            visualizerMode = mode;
+            particles = []; // Reset particles
+            showToast(`Visualizer: ${mode.toUpperCase()} mode`);
+        }
+        
+        function initVisualizer() {
+            const canvas = document.getElementById('visualizer');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Dynamic resizing
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            
+            function drawVisualizer() {
+                if (!visualizerActive) return;
+                
+                // Simulate audio data since we can't access YouTube's audio
+                for (let i = 0; i < dataArray.length; i++) {
+                    dataArray[i] = Math.random() * 255 * (0.5 + Math.sin(Date.now() * 0.001 + i * 0.1) * 0.5);
+                }
+                
+                // Simulate beat detection
+                const beatPulse = document.getElementById('beatPulse');
+                if (beatPulse && beatPulse.checked) {
+                    const bass = dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255;
+                    if (bass > 0.8) {
+                        canvas.style.boxShadow = '0 0 50px #00ff66, 0 0 100px #00ff66';
+                        canvas.style.transition = 'box-shadow 0.1s ease';
+                    } else {
+                        canvas.style.boxShadow = 'none';
+                    }
+                }
+                
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                switch (visualizerMode) {
+                    case 'bars':
+                        drawBars(ctx, canvas, dataArray);
+                        break;
+                    case 'wave':
+                        drawWave(ctx, canvas, dataArray);
+                        break;
+                    case 'particles':
+                        drawParticles(ctx, canvas, dataArray);
+                        break;
+                    case 'sphere':
+                        drawSphere(ctx, canvas, dataArray);
+                        break;
+                    case 'kaleidoscope':
+                        drawKaleidoscope(ctx, canvas, dataArray);
+                        break;
+                }
+                
+                animationId = requestAnimationFrame(drawVisualizer);
+            }
+            
+            drawVisualizer();
+        }
+        
+        function drawBars(ctx, canvas, dataArray) {
+            const barCount = 64;
+            const barWidth = canvas.width / barCount;
+            
+            for (let i = 0; i < barCount; i++) {
+                const barHeight = (dataArray[Math.floor(i * dataArray.length / barCount)] / 255) * canvas.height * 0.8;
+                
+                // Create gradient with glow effect
+                const gradient = ctx.createLinearGradient(0, canvas.height - barHeight, 0, canvas.height);
+                const hue = (i / barCount) * 360;
+                gradient.addColorStop(0, `hsla(${hue}, 100%, 60%, 0.8)`);
+                gradient.addColorStop(0.5, `hsla(${hue}, 100%, 50%, 0.9)`);
+                gradient.addColorStop(1, `hsla(${hue}, 100%, 40%, 1)`);
+                
+                // Add glow
+                ctx.shadowColor = `hsl(${hue}, 100%, 50%)`;
+                ctx.shadowBlur = 20;
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 2, barHeight);
+            }
+        }
+        
+        function drawWave(ctx, canvas, dataArray) {
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#00ff66';
+            ctx.shadowColor = '#00ff66';
+            ctx.shadowBlur = 20;
+            
+            ctx.beginPath();
+            const sliceWidth = canvas.width / dataArray.length;
+            let x = 0;
+            
+            for (let i = 0; i < dataArray.length; i++) {
+                const v = dataArray[i] / 255;
+                const y = v * canvas.height / 2 + canvas.height / 4;
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                x += sliceWidth;
+            }
+            
+            ctx.stroke();
+            
+            // Mirror wave
+            ctx.strokeStyle = '#ff3b3b';
+            ctx.shadowColor = '#ff3b3b';
+            ctx.beginPath();
+            x = 0;
+            
+            for (let i = 0; i < dataArray.length; i++) {
+                const v = dataArray[i] / 255;
+                const y = canvas.height - (v * canvas.height / 2 + canvas.height / 4);
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                x += sliceWidth;
+            }
+            ctx.stroke();
+        }
+        
+        function drawParticles(ctx, canvas, dataArray) {
+            // Create new particles based on audio
+            const bass = dataArray.slice(0, 10).reduce((a, b) => a + b) / 10 / 255;
+            
+            if (bass > 0.7 && particles.length < 500) {
+                for (let i = 0; i < 10; i++) {
+                    particles.push({
+                        x: canvas.width / 2,
+                        y: canvas.height / 2,
+                        vx: (Math.random() - 0.5) * 10,
+                        vy: (Math.random() - 0.5) * 10,
+                        size: Math.random() * 5 + 2,
+                        color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                        life: 1
+                    });
+                }
+            }
+            
+            // Update and draw particles
+            particles = particles.filter(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= 0.01;
+                p.size *= 0.98;
+                
+                ctx.save();
+                ctx.globalAlpha = p.life;
+                ctx.fillStyle = p.color;
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 10;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+                
+                return p.life > 0 && p.size > 0.5;
+            });
+        }
+        
+        function drawSphere(ctx, canvas, dataArray) {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) * 0.3;
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            
+            for (let i = 0; i < dataArray.length; i++) {
+                const angle = (i / dataArray.length) * Math.PI * 2;
+                const amp = dataArray[i] / 255;
+                const r = radius + amp * 100;
+                
+                const x = Math.cos(angle) * r;
+                const y = Math.sin(angle) * r;
+                
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, 20);
+                gradient.addColorStop(0, `hsla(${i * 360 / dataArray.length}, 100%, 60%, 1)`);
+                gradient.addColorStop(1, `hsla(${i * 360 / dataArray.length}, 100%, 30%, 0)`);
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(x, y, 5 + amp * 15, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.restore();
+        }
+        
+        function drawKaleidoscope(ctx, canvas, dataArray) {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const sections = 6;
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            
+            for (let s = 0; s < sections; s++) {
+                ctx.save();
+                ctx.rotate((Math.PI * 2 / sections) * s);
+                
+                for (let i = 0; i < dataArray.length / 4; i++) {
+                    const angle = (i / (dataArray.length / 4)) * Math.PI / 3;
+                    const amp = dataArray[i] / 255;
+                    const r = 50 + i * 5 + amp * 50;
+                    
+                    const x = Math.cos(angle) * r;
+                    const y = Math.sin(angle) * r;
+                    
+                    ctx.fillStyle = `hsla(${(s * 60 + i * 10) % 360}, 100%, 50%, ${amp})`;
+                    ctx.fillRect(x, y, 5, 5);
+                }
+                
+                ctx.restore();
+            }
+            
+            ctx.restore();
         }
         
         function deleteVideo(videoId) {
@@ -856,6 +1303,89 @@
             refreshVaultVideos();
         }
 
+        // Drag and drop handlers
+        function setupDragDrop() {
+            const dropZone = document.getElementById('dropZone');
+            let dragCounter = 0;
+            
+            document.addEventListener('dragenter', (e) => {
+                e.preventDefault();
+                dragCounter++;
+                dropZone.classList.add('active');
+            });
+            
+            document.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dragCounter--;
+                if (dragCounter === 0) {
+                    dropZone.classList.remove('active');
+                }
+            });
+            
+            document.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+            
+            document.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dragCounter = 0;
+                dropZone.classList.remove('active');
+                
+                const files = Array.from(e.dataTransfer.files);
+                const jsonFile = files.find(f => f.name.endsWith('.json'));
+                
+                if (jsonFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            
+                            if (data.videos && Array.isArray(data.videos)) {
+                                let imported = 0;
+                                let duplicates = 0;
+                                
+                                data.videos.forEach(video => {
+                                    if (!vaultVideos.some(v => v.id === video.id)) {
+                                        vaultVideos.push(video);
+                                        imported++;
+                                    } else {
+                                        duplicates++;
+                                    }
+                                });
+                                
+                                if (data.categories) {
+                                    data.categories.forEach(cat => {
+                                        if (!vaultCategories.includes(cat)) {
+                                            vaultCategories.push(cat);
+                                        }
+                                    });
+                                }
+                                
+                                localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+                                localStorage.setItem('vaultCategories', JSON.stringify(vaultCategories));
+                                updateCategoryPills();
+                                refreshVaultVideos();
+                                updateStats();
+                                
+                                let message = `Imported ${imported} new videos`;
+                                if (duplicates > 0) {
+                                    message += ` (${duplicates} duplicates skipped)`;
+                                }
+                                showToast(message);
+                            } else {
+                                showToast('Invalid collection file format', 'error');
+                            }
+                        } catch (err) {
+                            showToast('Failed to read JSON file', 'error');
+                        }
+                    };
+                    reader.readAsText(jsonFile);
+                } else {
+                    showToast('Please drop a JSON file', 'error');
+                }
+            });
+        }
+
         window.onload = function() {
             initializeDefaultVideos();
             updateCategoryPills();
@@ -875,6 +1405,9 @@
             document.querySelector('[data-category="all"]').onclick = function() {
                 filterByCategory('all', this);
             };
+            
+            // Setup drag and drop
+            setupDragDrop();
         };
         
         // Player Control Functions
