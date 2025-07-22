@@ -42,8 +42,8 @@ A clean, ad-free YouTube music player that lets you build and manage your own mu
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/jguida941/youtube-music-vault.git
-cd youtube-music-vault
+git clone https://github.com/jguida941/vault-player.git
+cd vault-player
 
 # Install dependencies
 npm install
@@ -53,7 +53,8 @@ npm start
 ```
 
 ### Access the Vault
-1. Open browser http://localhost:8080/working.html
+- Open browser to http://localhost:8080 (automatically redirects to the vault)
+- Or directly visit http://localhost:8080/working.html
 
 ## Usage
 
