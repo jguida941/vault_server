@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔥 THE VAULT 🔒</title>
+    <style>
+        body {
+            background: #121212;
+            color: #00ff66;
+            font-family: monospace;
+            padding: 2rem;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ff3b3b, #00ff66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .video-container {
+            margin-bottom: 2rem;
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+        .video-title {
+            color: #ff5555;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px #00ff66;
+        }
+        .input-section {
+            background: #222;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        input {
+            background: #333;
+            border: 1px solid #00ff66;
+            color: #00ff66;
+            padding: 0.5rem;
+            width: 60%;
+            margin-right: 1rem;
+            border-radius: 5px;
+        }
+        button {
+            background: #00ff66;
+            color: #121212;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #00cc55;
+        }
+        .header-section {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 2px solid #ff3b3b;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,102,0.1) 0%, transparent 70%);
+            animation: pulse 6s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ff3b3b, #00ff66, #ff3b3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient 3s linear infinite;
+        }
+        @keyframes gradient {
+            to { background-position: 200% center; }
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #aaa;
+            margin-bottom: 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-card {
+            background: #2a2a2a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #444;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            color: #00ff66;
+            font-weight: bold;
+        }
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .header-section h2 {
+            color: #ff3b3b;
+            margin-bottom: 1rem;
+        }
+        .header-section p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+        .feature-list {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .feature-badge {
+            background: #2a2a2a;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #444;
+        }
+        .categories-section {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid #333;
+        }
+        .category-pills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .category-pill {
+            background: #333;
+            color: #00ff66;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            border: 1px solid #00ff66;
+            transition: all 0.3s;
+        }
+        .category-pill:hover {
+            background: #00ff66;
+            color: #121212;
+        }
+        .category-pill.active {
+            background: #00ff66;
+            color: #121212;
+        }
+        .mode-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #333;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #333;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-switch.active {
+            background: #00ff66;
+        }
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+        .private-badge {
+            background: #ff3b3b;
+            color: #fff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        .playback-controls {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .control-button {
+            background: #333;
+            color: #00ff66;
+            border: 1px solid #00ff66;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: monospace;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .control-button:hover {
+            background: #00ff66;
+            color: #121212;
+        }
+        .control-button.active {
+            background: #00ff66;
+            color: #121212;
+        }
+        .now-playing {
+            flex: 1;
+            color: #aaa;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        .now-playing strong {
+            color: #ff3b3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="mode-toggle">
+        <span id="modeLabel">🔓 Public</span>
+        <div class="toggle-switch" id="modeToggle" onclick="toggleMode()">
+            <div class="toggle-slider"></div>
+        </div>
+        <span>🔒 Private</span>
+    </div>
+    
+    <div class="hero-section" id="heroSection">
+        <h1 class="hero-title">🔥 THE VAULT 🔒</h1>
+        <p class="hero-subtitle">Your Ad-Free Music Terminal</p>
+        <p style="color: #888; margin-bottom: 2rem;">Stream unlimited music. No ads. No tracking. Just vibes.</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalTracks">0</div>
+                <div class="stat-label">Total Tracks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalCategories">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">No Ads</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Private</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="header-section" id="publicInfo">
+        <h2>🎵 How It Works</h2>
+        <p><strong>1. Add Music:</strong> Paste any YouTube URL or video ID</p>
+        <p><strong>2. Organize:</strong> Categorize your tracks (Hip-Hop, Rock, etc.)</p>
+        <p><strong>3. Save Forever:</strong> Export your collection anytime</p>
+        <div class="feature-list">
+            <span class="feature-badge">✅ No Ads</span>
+            <span class="feature-badge">✅ No Tracking</span>
+            <span class="feature-badge">✅ LocalStorage</span>
+            <span class="feature-badge">✅ Categories</span>
+            <span class="feature-badge">✅ Private Mode</span>
+        </div>
+    </div>
+    
+    <div class="categories-section">
+        <h3>📁 Categories</h3>
+        <div class="category-pills" id="categoryPills">
+            <div class="category-pill active" data-category="all">All</div>
+            <div class="category-pill" data-category="hip-hop">Hip Hop</div>
+            <div class="category-pill" data-category="rock">Rock</div>
+            <div class="category-pill" data-category="electronic">Electronic</div>
+            <div class="category-pill" data-category="chill">Chill</div>
+            <button class="category-pill" onclick="addNewCategory()" style="background: #444;">+ Add Category</button>
+        </div>
+    </div>
+    
+    <div class="playback-controls">
+        <div class="now-playing">
+            <span id="nowPlayingText">Launch the player to auto-play your collection</span>
+        </div>
+        <button class="control-button" onclick="openPlayer('all')" style="background: #ff3b3b; border-color: #ff3b3b;">
+            🚀 Open Auto-Player (All Videos)
+        </button>
+        <button class="control-button" onclick="openPlayer(currentCategory)">
+            ▶️ Play Current Category Only
+        </button>
+    </div>
+    
+    <div class="input-section">
+        <h3>🎧 Add Your Own Track</h3>
+        <input type="text" id="videoInput" placeholder="Paste YouTube URL or video ID">
+        <button onclick="loadVideo()">▶️ Play</button>
+        <button onclick="saveCollection()">💾 Save Collection</button>
+        <button onclick="loadCollection()">📂 Load Collection</button>
+        <button onclick="clearSession()">🗑️ Clear Session</button>
+    </div>
+    
+    <div id="session-videos"></div>
+    
+    <script>
+        let vaultVideos = JSON.parse(localStorage.getItem('vaultVideos') || '[]');
+        let vaultCategories = JSON.parse(localStorage.getItem('vaultCategories') || '["Hip Hop", "Rock", "Electronic", "Chill"]');
+        let currentCategory = 'all';
+        let privateMode = JSON.parse(localStorage.getItem('privateMode') || 'false');
+        
+        function initializeDefaultVideos() {
+            const defaultVideos = [
+                { id: 'ALimx-H8C6s', title: 'NBA YoungBoy - House Arrest Tingz', category: 'Hip Hop', isPrivate: false },
+                { id: '4dFTqJ9aUiQ', title: 'NBA YoungBoy - KickerBoxer', category: 'Hip Hop', isPrivate: false },
+                { id: 'tDPoVpDdewg', title: 'Lil Keed - Mind Games', category: 'Hip Hop', isPrivate: false }
+            ];
+            
+            // Only add defaults if vault is empty
+            if (vaultVideos.length === 0) {
+                defaultVideos.forEach(video => {
+                    video.addedDate = Date.now();
+                    vaultVideos.push(video);
+                });
+                localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+            }
+        }
+        
+        function updateStats() {
+            document.getElementById('totalTracks').textContent = vaultVideos.length;
+            document.getElementById('totalCategories').textContent = vaultCategories.length;
+        }
+        
+        function loadVideo() {
+            const input = document.getElementById('videoInput').value.trim();
+            if (!input) return;
+            
+            const match = input.match(/(?:v=|\/)([0-9A-Za-z_-]{11})/);
+            const videoId = match ? match[1] : input;
+            
+            const title = prompt('Enter a title for this track:') || 'Custom Track';
+            const category = prompt(`Enter category (${vaultCategories.join(', ')}):`) || 'Uncategorized';
+            const isPrivate = privateMode || confirm('Mark this video as private? (only visible in private mode)');
+            
+            const video = { 
+                id: videoId, 
+                title: title,
+                category: category,
+                addedDate: Date.now(),
+                isPrivate: isPrivate
+            };
+            
+            vaultVideos.push(video);
+            localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+            
+            if (!vaultCategories.includes(category) && category !== 'Uncategorized') {
+                vaultCategories.push(category);
+                localStorage.setItem('vaultCategories', JSON.stringify(vaultCategories));
+                updateCategoryPills();
+            }
+            
+            addVideoToDOM(video);
+            document.getElementById('videoInput').value = '';
+            updateStats();
+        }
+        
+        function addVideoToDOM(video) {
+            if (currentCategory !== 'all' && video.category !== currentCategory) return;
+            if (!privateMode && video.isPrivate) return;
+            
+            const container = document.createElement('div');
+            container.className = 'video-container';
+            container.setAttribute('data-category', video.category);
+            container.innerHTML = `
+                <div class="video-title">
+                    ${video.title} 
+                    <span style="color: #666;">[${video.category}]</span>
+                    ${video.isPrivate ? '<span class="private-badge">PRIVATE</span>' : ''}
+                </div>
+                <iframe src="https://www.youtube-nocookie.com/embed/${video.id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            `;
+            document.getElementById('session-videos').appendChild(container);
+        }
+        
+        function saveCollection() {
+            const data = JSON.stringify({
+                videos: vaultVideos,
+                categories: vaultCategories,
+                exportDate: new Date().toISOString()
+            }, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `vault-collection-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function loadCollection() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (data.videos) {
+                            vaultVideos = data.videos;
+                            localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+                        }
+                        if (data.categories) {
+                            vaultCategories = data.categories;
+                            localStorage.setItem('vaultCategories', JSON.stringify(vaultCategories));
+                            updateCategoryPills();
+                        }
+                        refreshVaultVideos();
+                        updateStats();
+                    } catch (err) {
+                        alert('Invalid collection file');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+        
+        function clearSession() {
+            if (confirm('Clear your entire vault? This cannot be undone!')) {
+                vaultVideos = [];
+                localStorage.removeItem('vaultVideos');
+                document.getElementById('session-videos').innerHTML = '';
+                updateStats();
+            }
+        }
+        
+        function refreshVaultVideos() {
+            document.getElementById('session-videos').innerHTML = '';
+            vaultVideos.forEach(video => addVideoToDOM(video));
+        }
+        
+        function filterByCategory(category, element) {
+            currentCategory = category;
+            document.querySelectorAll('.category-pill').forEach(pill => {
+                pill.classList.remove('active');
+            });
+            if (element) element.classList.add('active');
+            refreshVaultVideos();
+        }
+        
+        function addNewCategory() {
+            const newCategory = prompt('Enter new category name:');
+            if (newCategory && !vaultCategories.includes(newCategory)) {
+                vaultCategories.push(newCategory);
+                localStorage.setItem('vaultCategories', JSON.stringify(vaultCategories));
+                updateCategoryPills();
+            }
+        }
+        
+        function updateCategoryPills() {
+            const container = document.getElementById('categoryPills');
+            container.innerHTML = '<div class="category-pill active" data-category="all">All</div>';
+            
+            vaultCategories.forEach(cat => {
+                const pill = document.createElement('div');
+                pill.className = 'category-pill';
+                pill.setAttribute('data-category', cat);
+                pill.textContent = cat;
+                pill.onclick = function() { filterByCategory(cat, this); };
+                container.appendChild(pill);
+            });
+            
+            const addButton = document.createElement('button');
+            addButton.className = 'category-pill';
+            addButton.style.background = '#444';
+            addButton.textContent = '+ Add Category';
+            addButton.onclick = addNewCategory;
+            container.appendChild(addButton);
+        }
+        
+        function toggleMode() {
+            privateMode = !privateMode;
+            localStorage.setItem('privateMode', JSON.stringify(privateMode));
+            
+            const toggle = document.getElementById('modeToggle');
+            const publicInfo = document.getElementById('publicInfo');
+            const heroSection = document.getElementById('heroSection');
+            
+            if (privateMode) {
+                toggle.classList.add('active');
+                publicInfo.style.display = 'none';
+                heroSection.style.display = 'none';
+            } else {
+                toggle.classList.remove('active');
+                publicInfo.style.display = 'block';
+                heroSection.style.display = 'block';
+            }
+            
+            refreshVaultVideos();
+            updateStats();
+        }
+        
+        window.onload = function() {
+            initializeDefaultVideos();
+            updateCategoryPills();
+            
+            if (privateMode) {
+                document.getElementById('modeToggle').classList.add('active');
+                document.getElementById('publicInfo').style.display = 'none';
+                document.getElementById('heroSection').style.display = 'none';
+            }
+            
+            refreshVaultVideos();
+            updateStats();
+            
+            document.querySelector('[data-category="all"]').onclick = function() {
+                filterByCategory('all', this);
+            };
+        };
+        
+        // Player Control Functions
+        function openPlayer(category) {
+            const playerUrl = `/player.html?category=${category}`;
+            window.open(playerUrl, '_blank', 'width=1200,height=800');
+        }
+        
+    </script>
+</body>
+</html>

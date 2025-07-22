@@ -1,0 +1,18 @@
+{
+  "name": "vault-server",
+  "version": "1.0.0",
+  "description": "Ad-free YouTube music player server - no ads, no embeds, just music",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "stop": "if [ -f .pid ]; then kill $(cat .pid) && rm .pid && echo '✅ Server stopped'; else pkill -f 'node server.js' || echo 'Server not running'; fi",
+    "restart": "npm run stop && npm start",
+    "dev": "node server.js",
+    "open": "open http://localhost:8080/working.html",
+    "vault": "npm start & sleep 2 && npm run open"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ytdl-core": "^4.11.5"
+  }
+}

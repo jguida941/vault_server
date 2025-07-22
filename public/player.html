@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🎵 THE VAULT PLAYER</title>
+    <style>
+        body {
+            background: #000;
+            color: #00ff66;
+            font-family: monospace;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .player-header {
+            background: #1a1a1a;
+            padding: 1rem 2rem;
+            border-bottom: 2px solid #ff3b3b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .player-title {
+            font-size: 1.5rem;
+            color: #ff3b3b;
+        }
+        .player-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .control-btn {
+            background: #333;
+            color: #00ff66;
+            border: 1px solid #00ff66;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: monospace;
+        }
+        .control-btn:hover {
+            background: #00ff66;
+            color: #000;
+        }
+        .control-btn.active {
+            background: #00ff66;
+            color: #000;
+            box-shadow: 0 0 10px #00ff66;
+            font-weight: bold;
+        }
+        .now-playing {
+            background: #222;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .video-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        #player {
+            width: 100%;
+            height: 100%;
+        }
+        .queue-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: #1a1a1a;
+            border-left: 1px solid #333;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+        .queue-sidebar.open {
+            transform: translateX(0);
+        }
+        .queue-header {
+            padding: 1rem;
+            background: #222;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+        }
+        .queue-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .queue-item:hover {
+            background: #333;
+        }
+        .queue-item.playing {
+            background: #333;
+            border-left: 3px solid #00ff66;
+        }
+        .countdown {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            color: #00ff66;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-header">
+        <div class="player-title">🎵 VAULT PLAYER - Auto Mode</div>
+        <div class="player-controls">
+            <button class="control-btn" onclick="previousVideo()">⏮️ Previous</button>
+            <button class="control-btn" onclick="togglePlayPause()">⏸️ Pause</button>
+            <button class="control-btn" onclick="nextVideo()">⏭️ Next</button>
+            <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 Shuffle</button>
+            <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()">🔁 Repeat</button>
+            <button class="control-btn" onclick="toggleQueue()">📜 Queue</button>
+        </div>
+    </div>
+    
+    <div class="now-playing" id="nowPlaying">
+        Loading playlist...
+    </div>
+    
+    <div class="video-wrapper">
+        <div id="player"></div>
+        <div class="countdown" id="countdown">Next video in: 5</div>
+    </div>
+    
+    <div class="queue-sidebar" id="queueSidebar">
+        <div class="queue-header">
+            <h3>Playlist Queue</h3>
+            <div>Total: <span id="queueCount">0</span> tracks</div>
+        </div>
+        <div id="queueList"></div>
+    </div>
+
+    <script>
+        // Get vault data from localStorage
+        let vaultVideos = JSON.parse(localStorage.getItem('vaultVideos') || '[]');
+        let shuffleMode = JSON.parse(localStorage.getItem('shuffleMode') || 'false');
+        let repeatMode = JSON.parse(localStorage.getItem('repeatMode') || 'false');
+        let privateMode = JSON.parse(localStorage.getItem('privateMode') || 'false');
+        let currentCategory = new URLSearchParams(window.location.search).get('category') || 'all';
+        
+        // Player state
+        let player;
+        let currentIndex = 0;
+        let isPlaying = true;
+        let playlist = [];
+        
+        // Initialize YouTube Player API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+        // YouTube API callback
+        function onYouTubeIframeAPIReady() {
+            initializePlaylist();
+            createPlayer();
+        }
+        
+        function initializePlaylist() {
+            // Filter videos based on category and private mode
+            playlist = vaultVideos.filter(video => {
+                if (!privateMode && video.isPrivate) return false;
+                if (currentCategory !== 'all' && video.category !== currentCategory) return false;
+                return true;
+            });
+            
+            // Set initial button states
+            if (shuffleMode) {
+                document.getElementById('shuffleBtn').classList.add('active');
+            }
+            if (repeatMode) {
+                document.getElementById('repeatBtn').classList.add('active');
+            }
+            
+            updateQueueDisplay();
+        }
+        
+        function createPlayer() {
+            if (playlist.length === 0) {
+                document.getElementById('nowPlaying').textContent = 'No videos in playlist';
+                return;
+            }
+            
+            // Start with a random video if shuffle is on
+            if (shuffleMode) {
+                currentIndex = Math.floor(Math.random() * playlist.length);
+            }
+            
+            const videoId = playlist[currentIndex].id;
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: videoId,
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 1,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            updateNowPlaying();
+            if (isPlaying) {
+                event.target.playVideo();
+            }
+        }
+        
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                handleVideoEnd();
+            } else if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                updateNowPlaying();
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                isPlaying = false;
+            }
+        }
+        
+        function handleVideoEnd() {
+            if (repeatMode && playlist.length === 1) {
+                player.playVideo();
+            } else {
+                showCountdown();
+            }
+        }
+        
+        function showCountdown() {
+            let count = 5;
+            const countdownEl = document.getElementById('countdown');
+            countdownEl.style.display = 'block';
+            
+            const interval = setInterval(() => {
+                countdownEl.textContent = `Next video in: ${count}`;
+                count--;
+                
+                if (count < 0) {
+                    clearInterval(interval);
+                    countdownEl.style.display = 'none';
+                    nextVideo();
+                }
+            }, 1000);
+        }
+        
+        function nextVideo() {
+            if (playlist.length === 0) return;
+            
+            if (shuffleMode) {
+                // In shuffle mode, pick a random different video
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * playlist.length);
+                } while (newIndex === currentIndex && playlist.length > 1);
+                currentIndex = newIndex;
+            } else {
+                // Normal sequential playback
+                currentIndex = (currentIndex + 1) % playlist.length;
+                if (currentIndex === 0 && !repeatMode && playlist.length > 1) {
+                    // End of playlist, stop if not repeating
+                    return;
+                }
+            }
+            
+            const video = playlist[currentIndex];
+            player.loadVideoById(video.id);
+            updateNowPlaying();
+            updateQueueDisplay();
+        }
+        
+        function previousVideo() {
+            if (playlist.length === 0) return;
+            
+            if (shuffleMode) {
+                // In shuffle mode, pick a random different video
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * playlist.length);
+                } while (newIndex === currentIndex && playlist.length > 1);
+                currentIndex = newIndex;
+            } else {
+                // Normal sequential playback
+                currentIndex = currentIndex - 1;
+                if (currentIndex < 0) currentIndex = playlist.length - 1;
+            }
+            
+            const video = playlist[currentIndex];
+            player.loadVideoById(video.id);
+            updateNowPlaying();
+            updateQueueDisplay();
+        }
+        
+        function togglePlayPause() {
+            if (!player) return;
+            
+            if (isPlaying) {
+                player.pauseVideo();
+                document.querySelector('.control-btn').textContent = '▶️ Play';
+            } else {
+                player.playVideo();
+                document.querySelector('.control-btn').textContent = '⏸️ Pause';
+            }
+        }
+        
+        function toggleShuffle() {
+            shuffleMode = !shuffleMode;
+            localStorage.setItem('shuffleMode', JSON.stringify(shuffleMode));
+            
+            const btn = document.getElementById('shuffleBtn');
+            if (shuffleMode) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+            
+            updateQueueDisplay();
+        }
+        
+        function toggleRepeat() {
+            repeatMode = !repeatMode;
+            localStorage.setItem('repeatMode', JSON.stringify(repeatMode));
+            
+            const btn = document.getElementById('repeatBtn');
+            if (repeatMode) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+        
+        function toggleQueue() {
+            document.getElementById('queueSidebar').classList.toggle('open');
+        }
+        
+        function updateNowPlaying() {
+            if (playlist.length === 0) return;
+            const video = playlist[currentIndex];
+            document.getElementById('nowPlaying').innerHTML = `
+                🎵 Now Playing: <strong>${video.title}</strong> 
+                [${video.category}] 
+                (${currentIndex + 1}/${playlist.length})
+            `;
+        }
+        
+        function updateQueueDisplay() {
+            const queueList = document.getElementById('queueList');
+            const queueCount = document.getElementById('queueCount');
+            
+            queueCount.textContent = playlist.length;
+            queueList.innerHTML = '';
+            
+            playlist.forEach((video, i) => {
+                const item = document.createElement('div');
+                item.className = 'queue-item' + (i === currentIndex ? ' playing' : '');
+                item.textContent = `${i + 1}. ${video.title}`;
+                item.onclick = () => playSpecificVideo(i);
+                queueList.appendChild(item);
+            });
+        }
+        
+        function playSpecificVideo(index) {
+            currentIndex = index;
+            const video = playlist[currentIndex];
+            player.loadVideoById(video.id);
+            updateNowPlaying();
+            updateQueueDisplay();
+        }
+        
+        
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case ' ':
+                    e.preventDefault();
+                    togglePlayPause();
+                    break;
+                case 'ArrowRight':
+                    nextVideo();
+                    break;
+                case 'ArrowLeft':
+                    previousVideo();
+                    break;
+                case 's':
+                    toggleShuffle();
+                    break;
+                case 'r':
+                    toggleRepeat();
+                    break;
+                case 'q':
+                    toggleQueue();
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
