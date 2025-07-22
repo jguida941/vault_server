@@ -53,8 +53,7 @@ npm start
 ```
 
 ### Access the Vault
-1. Open browser to http://localhost:8080 (automatically redirects to the vault interface)
-2. Or directly visit http://localhost:8080/working.html
+1. Open browser http://localhost:8080/working.html
 
 ## Usage
 
