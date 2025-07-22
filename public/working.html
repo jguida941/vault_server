@@ -79,6 +79,7 @@
             height: 160px;
             object-fit: cover;
             background: #222;
+            border-radius: 8px 8px 0 0;
         }
         .video-info {
             padding: 0.8rem;
@@ -109,6 +110,16 @@
             border-radius: 10px;
             margin-bottom: 2rem;
         }
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .button-group button {
+            flex: 1;
+            min-width: 120px;
+        }
         input {
             background: #333;
             border: 1px solid #00ff66;
@@ -131,11 +142,12 @@
             background: #00cc55;
         }
         .header-section {
-            background: #1a1a1a;
+            background: linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(0,255,102,0.05) 100%);
             padding: 2rem;
             border-radius: 12px;
             margin-bottom: 2rem;
-            border: 2px solid #ff3b3b;
+            border: 2px solid #333;
+            backdrop-filter: blur(10px);
         }
         .hero-section {
             text-align: center;
@@ -192,6 +204,12 @@
             border-radius: 12px;
             border: 1px solid #444;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 255, 102, 0.2);
         }
         .stat-number {
             font-size: 2rem;
@@ -218,11 +236,12 @@
             margin-top: 1rem;
         }
         .feature-badge {
-            background: #2a2a2a;
+            background: rgba(0, 255, 102, 0.1);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            border: 1px solid #444;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            color: #00ff66;
         }
         .categories-section {
             background: #1a1a1a;
@@ -245,14 +264,18 @@
             cursor: pointer;
             border: 1px solid #00ff66;
             transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         .category-pill:hover {
             background: #00ff66;
             color: #121212;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 255, 102, 0.3);
         }
         .category-pill.active {
             background: #00ff66;
             color: #121212;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.5);
         }
         .mode-toggle {
             position: fixed;
@@ -274,10 +297,12 @@
             background: #333;
             border-radius: 30px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
         }
         .toggle-switch.active {
             background: #00ff66;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 102, 0.5);
         }
         .toggle-slider {
             position: absolute;
@@ -287,7 +312,7 @@
             height: 24px;
             background: #fff;
             border-radius: 50%;
-            transition: transform 0.3s;
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         .toggle-switch.active .toggle-slider {
             transform: translateX(30px);
@@ -312,7 +337,7 @@
             flex-wrap: wrap;
         }
         .control-button {
-            background: #333;
+            background: linear-gradient(135deg, #333 0%, #444 100%);
             color: #00ff66;
             border: 1px solid #00ff66;
             padding: 0.6rem 1.2rem;
@@ -324,13 +349,16 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 255, 102, 0.2);
         }
         .control-button:hover {
-            background: #00ff66;
+            background: linear-gradient(135deg, #00ff66 0%, #00cc55 100%);
             color: #121212;
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.4);
+            transform: translateY(-1px);
         }
         .control-button.active {
-            background: #00ff66;
+            background: linear-gradient(135deg, #00ff66 0%, #00cc55 100%);
             color: #121212;
         }
         .now-playing {
@@ -425,19 +453,19 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number" id="totalTracks">0</div>
-                <div class="stat-label">Total Tracks</div>
+                <div class="stat-label">🎵 Total Tracks</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalCategories">4</div>
-                <div class="stat-label">Categories</div>
+                <div class="stat-label">🗂️ Categories</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">∞</div>
-                <div class="stat-label">No Ads</div>
+                <div class="stat-label">✅ No Ads</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">100%</div>
-                <div class="stat-label">Private</div>
+                <div class="stat-label">🔐 Private</div>
             </div>
         </div>
     </div>
@@ -448,11 +476,11 @@
         <p><strong>2. Organize:</strong> Categorize your tracks (Hip-Hop, Rock, etc.)</p>
         <p><strong>3. Save Forever:</strong> Export your collection anytime</p>
         <div class="feature-list">
-            <span class="feature-badge">✅ No Ads</span>
-            <span class="feature-badge">✅ No Tracking</span>
-            <span class="feature-badge">✅ LocalStorage</span>
-            <span class="feature-badge">✅ Categories</span>
-            <span class="feature-badge">✅ Private Mode</span>
+            <span class="feature-badge">✓ No Ads</span>
+            <span class="feature-badge">✓ No Tracking</span>
+            <span class="feature-badge">✓ LocalStorage</span>
+            <span class="feature-badge">✓ Categories</span>
+            <span class="feature-badge">✓ Private Mode</span>
         </div>
     </div>
     
@@ -489,10 +517,12 @@
     <div class="input-section">
         <h3>🎧 Add Your Own Track</h3>
         <input type="text" id="videoInput" placeholder="Paste YouTube URL or video ID">
-        <button onclick="loadVideo()">➕ Add Song</button>
-        <button onclick="saveCollection()">💾 Save Collection</button>
-        <button onclick="loadCollection()">📂 Load Collection</button>
-        <button onclick="clearSession()">🗑️ Clear Session</button>
+        <button onclick="loadVideo()" style="margin-left: 0.5rem;">➕ Add Song</button>
+        <div class="button-group">
+            <button onclick="saveCollection()">💾 Save Collection</button>
+            <button onclick="loadCollection()">📂 Load Collection</button>
+            <button onclick="clearSession()">🗑️ Clear Session</button>
+        </div>
     </div>
     
     <div id="session-videos" class="video-grid"></div>
@@ -657,30 +687,40 @@
         
         function playVideo(videoId) {
             // Remove any existing player
-            const existingPlayer = document.getElementById('embedded-player');
+            const existingPlayer = document.getElementById('main-player');
             if (existingPlayer) {
                 existingPlayer.remove();
             }
             
-            // Create embedded player
-            const playerDiv = document.createElement('div');
-            playerDiv.id = 'embedded-player';
-            playerDiv.style.cssText = `
+            // Create full-screen overlay player
+            const playerOverlay = document.createElement('div');
+            playerOverlay.id = 'main-player';
+            playerOverlay.style.cssText = `
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 400px;
-                height: 225px;
-                z-index: 1000;
-                border-radius: 12px;
-                overflow: hidden;
-                box-shadow: 0 0 30px rgba(0,255,102,0.5);
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: #000;
+                z-index: 9999;
+                padding: 0;
+                margin: 0;
             `;
-            playerDiv.innerHTML = `
-                <button onclick="closePlayer()" style="position: absolute; top: 5px; right: 5px; background: #ff3b3b; color: white; border: none; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; z-index: 1001;">×</button>
-                <iframe width="100%" height="100%" src="/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+            // Find the video title
+            const video = vaultVideos.find(v => v.id === videoId);
+            const title = video ? video.title : 'Now Playing';
+            
+            playerOverlay.innerHTML = `
+                <button onclick="closePlayer()" style="position: fixed; top: 20px; right: 20px; background: #ff3b3b; color: white; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; font-size: 2rem; z-index: 10001; box-shadow: 0 4px 12px rgba(0,0,0,0.8);">✕</button>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #000;">
+                    <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen style="width: 100%; height: 100%; max-width: 100vw; max-height: 100vh;"></iframe>
+                </div>
             `;
-            document.body.appendChild(playerDiv);
+            
+            document.body.appendChild(playerOverlay);
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
             currentlyPlaying = videoId;
             
             // Update playing indicator
@@ -695,9 +735,10 @@
         }
         
         function closePlayer() {
-            const player = document.getElementById('embedded-player');
+            const player = document.getElementById('main-player');
             if (player) {
                 player.remove();
+                document.body.style.overflow = ''; // Restore scrolling
                 currentlyPlaying = null;
                 document.querySelectorAll('.video-container').forEach(container => {
                     container.classList.remove('playing');
