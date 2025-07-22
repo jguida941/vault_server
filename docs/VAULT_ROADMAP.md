@@ -5,6 +5,65 @@ Trackable roadmap from MVP → Feature-rich private vault system
 
 ---
 
+## 🎨 Visual/UI Improvements (Pre-Phase Cleanup)
+
+### 1. 🔢 Stat Boxes (Top Row)
+- Add light borders or shadows to each stat card for depth
+- Use matching iconography:
+  - ✅ Total Tracks → 🎵
+  - 📂 Categories → 🗂️
+  - 🔒 Private % → 🛡️ or 🔐
+- Fix alignment – make sure all 4 are height-aligned and consistent padding
+
+### 2. 📕 "How It Works" Section
+- ✅ Great concept. Add a background tint (e.g., translucent green/black fade)
+- Use 🟢 emojis or checkmarks instead of the current text badge icons (they clash with rest of UI)
+- Shrink font slightly or make header collapsible on smaller screens
+
+### 3. 🟩 Category Tags
+- Too flat. Suggest:
+  - Add :hover effect (like glow or raise)
+  - Color code by genre (Hip-Hop = green, Rock = red, etc.)
+  - Option to pin/favorite a category
+
+### 4. 🧩 Add Track Section
+- Group all buttons (Add, Save, etc.) into one button group bar
+- Add margin between input and button block
+- Animate confirmation when a song is added
+
+### 5. 🎼 Song List
+- Highlight currently playing track (green glow border or play icon)
+- Group by category visually with thin dividers or colored badges
+- Album art rounded corners or soft shadows
+- Move "category" (e.g., Hip-Hop) under title, smaller font
+
+### 6. 🔴 Auto-Player Button
+- Too red; swap to a cleaner neon glow or soft gradient
+- Add play icon ▶️ inside button for visual hint
+
+### 7. 🔄 Public/Private Toggle
+- Animate the toggle
+- Add tooltip on hover: "Switch mode between Public/Private"
+
+### 8. 🧪 (Optional) Developer Sidebar
+- Could allow dev tools like:
+  - "⚙️ Dev Mode"
+  - "🧪 Test Grid"
+- To be added during export/development phase
+
+### Additional UI Improvements
+- Loading animations when fetching thumbnails
+- Smooth transitions between grid/list views
+- Better error handling UI (toast notifications)
+- Search/filter bar for large collections
+- Keyboard shortcuts overlay (? key)
+- Dark/Light theme toggle
+- Mobile-responsive improvements
+- Export statistics visualization
+- FIX: Click video to embed in page instead of opening YouTube
+
+---
+
 ## ✅ Phase 1: Core UI + LocalStorage Vault
 - ✅ Paste & Play Loader (URL/ID support)
 - ✅ Improve HTML layout with better visual cues & track explanations

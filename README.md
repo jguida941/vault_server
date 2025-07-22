@@ -7,15 +7,18 @@ A clean, ad-free YouTube music player that lets you build and manage your own mu
 ### Current Features
 - Ad-free YouTube playback using youtube-nocookie.com embeds
 - No tracking or analytics
-- Add videos by URL or video ID
-- Professional dark theme UI
+- Add videos by URL or video ID with YouTube thumbnail preview
+- Professional dark theme UI with grid/list view toggle
 - Video categorization system (Hip Hop, Rock, Electronic, Chill, custom categories)
+- Delete individual videos with hover × button
+- Delete categories with all associated videos
 - LocalStorage for permanent video storage
 - Save/load collections as JSON files
 - Public/Private mode toggle
 - Auto-play player with shuffle and repeat
 - Keyboard shortcuts in player
 - Session persistence across browser restarts
+- Real-time statistics tracking
 
 ### Auto-Play Player
 - Opens in separate window for uninterrupted playback
@@ -56,6 +59,46 @@ npm start
 - Open browser to http://localhost:8080 (automatically redirects to the vault)
 - Or directly visit http://localhost:8080/working.html
 
+## For Justin
+
+### Running the Server (Quick Reminder)
+```bash
+# Navigate to your vault folder
+cd /Users/jguida941/Desktop/vault_server
+
+# Start the server (it runs on port 8080)
+npm start
+
+# Or use the all-in-one command that starts server AND opens browser
+npm run vault
+```
+
+### Adding Your Music
+1. Go to http://localhost:8080 after starting the server
+2. Copy any YouTube URL and paste it in the input box
+3. Click "Play" - it'll ask for a title and category
+4. Your music is automatically saved in the browser
+
+### Customizing Your Path
+If you move the vault_server folder, just update your cd command:
+```bash
+# Example if you move it to Documents
+cd /Users/jguida941/Documents/vault_server
+npm start
+```
+
+### Quick Commands Cheat Sheet
+- `npm start` - Start the server
+- `npm stop` - Stop the server
+- `npm restart` - Restart if acting weird
+- `npm run vault` - Start + auto-open browser (easiest!)
+
+### Pro Tips
+- Use categories to organize (Hip Hop, Chill, Workout, etc.)
+- Private mode hides videos you mark as private
+- Save your collection regularly with "Save Collection" button
+- Auto-player lets you play entire playlists hands-free
+
 ## Usage
 
 ### Adding Videos
@@ -92,7 +135,28 @@ npm start
 - Public mode: Shows instructions and all features
 - Private mode: Hides instructions, only shows videos marked as non-private
 
-## Project Structure
+## How It Works - System Flowchart
+
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│   User Opens    │────▶│  server.js:8080  │────▶│  Redirects to   │
+│ localhost:8080  │     │  Express Server  │     │ /working.html   │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                                                            │
+                                                            ▼
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  Paste YouTube  │────▶│  Extract Video   │────▶│  Store in Local │
+│   URL/Video ID  │     │  ID & Metadata   │     │     Storage     │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                                                            │
+                                                            ▼
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  Display Video  │◀────│  Fetch YouTube   │◀────│  Refresh Video  │
+│  Grid/List View │     │   Thumbnails     │     │      List       │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+```
+
+## Project Structure & File Descriptions
 
 ```
 vault_server/
@@ -111,6 +175,37 @@ vault_server/
     ├── VAULT_PHASES.md   # Original development phases
     └── VAULT_ROADMAP.md  # Future feature roadmap
 ```
+
+### File Descriptions
+
+#### `server.js`
+- Express.js server running on port 8080
+- Serves static files from `/public` directory
+- Auto-redirects root `/` to `/working.html`
+- Dynamic embed endpoint `/embed/:id` for YouTube iframe generation
+- PID file management for reliable stop/restart commands
+
+#### `working.html`
+- Main vault interface with all features
+- Pure JavaScript implementation (no frameworks)
+- Features:
+  - Video management (add/delete)
+  - Category system (create/delete)
+  - Grid/List view toggle
+  - Public/Private mode
+  - Import/Export collections
+  - LocalStorage persistence
+  - Real-time statistics
+
+#### `player.html`
+- Standalone auto-play window
+- YouTube IFrame API integration
+- Features:
+  - Sequential playback with 5-second countdown
+  - Shuffle/Repeat modes
+  - Keyboard shortcuts
+  - Queue sidebar
+  - Click-to-play from queue
 
 ## NPM Scripts
 
