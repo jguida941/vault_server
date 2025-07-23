@@ -1,0 +1,47 @@
+{
+  "id": "scandinavian",
+  "name": "Scandinavian Frost",
+  "description": "Nordic minimalism meets winter",
+  "emoji": "\u2744\ufe0f",
+  "variables": {
+    "--bg-primary": "#ffffff",
+    "--bg-secondary": "#f5f5dc",
+    "--bg-tertiary": "#e6f3ff",
+    "--text-primary": "#2c3a44",
+    "--text-secondary": "#445566",
+    "--text-tertiary": "#667788",
+    "--accent-primary": "#4a90e2",
+    "--accent-secondary": "#2c3a44",
+    "--accent-tertiary": "#d0e0f0",
+    "--border-primary": "#e6f3ff",
+    "--border-secondary": "#d0e0f0",
+    "--shadow-primary": "rgba(230, 243, 255, 0.3)",
+    "--shadow-secondary": "rgba(54, 69, 79, 0.1)",
+    "--gradient-1": "#ffffff",
+    "--gradient-2": "#e6f3ff",
+    "--gradient-3": "#f5f5dc",
+    "--overlay": "rgba(255, 255, 255, 0.95)",
+    "--hover-transform": "translateY(-2px)",
+    "--transition-speed": "0.5s",
+    "--animation-name": "frost-crystal",
+    "--font-primary": "'Jost', sans-serif",
+    "--font-secondary": "'Work Sans', sans-serif"
+  },
+  "animations": {
+    "background": "frost-crystal",
+    "hover": "frost-crystal",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "frost": true,
+    "minimal": true
+  },
+  "fonts": {
+    "primary": "Work Sans",
+    "secondary": "Manrope",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Work+Sans+Manrope:wght@400;700&display=swap');"
+  }
+}

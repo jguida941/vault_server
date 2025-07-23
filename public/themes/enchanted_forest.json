@@ -1,0 +1,47 @@
+{
+  "id": "forest",
+  "name": "Enchanted Forest",
+  "description": "Magical woodland fantasy",
+  "emoji": "\ud83c\udf32",
+  "variables": {
+    "--bg-primary": "#013220",
+    "--bg-secondary": "#1a4d2e",
+    "--bg-tertiary": "#2d5f3f",
+    "--text-primary": "#90ee90",
+    "--text-secondary": "#8fbc8f",
+    "--text-tertiary": "#adff2f",
+    "--accent-primary": "#ffd700",
+    "--accent-secondary": "#dc143c",
+    "--accent-tertiary": "#8a9a5b",
+    "--border-primary": "#8a9a5b",
+    "--border-secondary": "#556b2f",
+    "--shadow-primary": "rgba(255, 215, 0, 0.3)",
+    "--shadow-secondary": "rgba(138, 154, 91, 0.2)",
+    "--gradient-1": "#013220",
+    "--gradient-2": "#8a9a5b",
+    "--gradient-3": "#ffd700",
+    "--overlay": "rgba(1, 50, 32, 0.85)",
+    "--hover-transform": "translateY(-4px) rotate(2deg)",
+    "--transition-speed": "0.6s",
+    "--animation-name": "firefly-dance",
+    "--font-primary": "'Pangolin', cursive",
+    "--font-secondary": "'Kalam', cursive"
+  },
+  "animations": {
+    "background": "firefly-dance",
+    "hover": "firefly-dance",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "leaves": true,
+    "fireflies": true
+  },
+  "fonts": {
+    "primary": "Merriweather",
+    "secondary": "Dancing Script",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Merriweather+Dancing+Script:wght@400;700&display=swap');"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "noir",
+  "name": "Noir Detective",
+  "description": "1940s film noir aesthetic",
+  "emoji": "\ud83d\udd75\ufe0f",
+  "variables": {
+    "--bg-primary": "#0a0a0a",
+    "--bg-secondary": "#1a1a1a",
+    "--bg-tertiary": "#2a2a2a",
+    "--text-primary": "#f0f0f0",
+    "--text-secondary": "#8b0000",
+    "--text-tertiary": "#848884",
+    "--accent-primary": "#8b0000",
+    "--accent-secondary": "#b87333",
+    "--accent-tertiary": "#ffffff",
+    "--border-primary": "#848884",
+    "--border-secondary": "#8b0000",
+    "--shadow-primary": "rgba(139, 0, 0, 0.5)",
+    "--shadow-secondary": "rgba(132, 136, 132, 0.3)",
+    "--gradient-1": "#0a0a0a",
+    "--gradient-2": "#8b0000",
+    "--gradient-3": "#b87333",
+    "--overlay": "rgba(10, 10, 10, 0.95)",
+    "--hover-transform": "translateY(-2px)",
+    "--transition-speed": "0.4s",
+    "--animation-name": "shadow-flicker",
+    "--font-primary": "'Special Elite', cursive",
+    "--font-secondary": "'Courier Prime', monospace"
+  },
+  "animations": {
+    "background": "shadow-flicker",
+    "hover": "shadow-flicker",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "smoke": true,
+    "shadows": true
+  },
+  "fonts": {
+    "primary": "Courier Prime",
+    "secondary": "Special Elite",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Courier+Prime+Special+Elite:wght@400;700&display=swap');"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "quantum",
+  "name": "Quantum Void",
+  "description": "Quantum computer interface",
+  "emoji": "\u269b\ufe0f",
+  "variables": {
+    "--bg-primary": "#0a0a0a",
+    "--bg-secondary": "#141414",
+    "--bg-tertiary": "#1e1e1e",
+    "--text-primary": "#0066cc",
+    "--text-secondary": "#6600ff",
+    "--text-tertiary": "#ffffff",
+    "--accent-primary": "#0066cc",
+    "--accent-secondary": "#6600ff",
+    "--accent-tertiary": "#00ffcc",
+    "--border-primary": "#0066cc",
+    "--border-secondary": "#6600ff",
+    "--shadow-primary": "rgba(0, 102, 204, 0.5)",
+    "--shadow-secondary": "rgba(102, 0, 255, 0.3)",
+    "--gradient-1": "#0066cc",
+    "--gradient-2": "#6600ff",
+    "--gradient-3": "#00ffcc",
+    "--overlay": "rgba(10, 10, 10, 0.9)",
+    "--hover-transform": "translateY(-5px) rotateX(10deg)",
+    "--transition-speed": "0.3s",
+    "--animation-name": "quantum-flux",
+    "--font-primary": "'Share Tech Mono', monospace",
+    "--font-secondary": "'Electrolize', sans-serif"
+  },
+  "animations": {
+    "background": "quantum-flux",
+    "hover": "quantum-flux",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": true,
+    "scanlines": false,
+    "quantumFlux": true
+  },
+  "fonts": {
+    "primary": "Source Code Pro",
+    "secondary": "Fira Code",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro+Fira+Code:wght@400;700&display=swap');"
+  }
+}

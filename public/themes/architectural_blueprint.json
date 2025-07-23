@@ -1,0 +1,47 @@
+{
+  "id": "blueprint",
+  "name": "Architectural Blueprint",
+  "description": "Technical drawing aesthetic",
+  "emoji": "\ud83d\udcd0",
+  "variables": {
+    "--bg-primary": "#0047ab",
+    "--bg-secondary": "#1e5ba8",
+    "--bg-tertiary": "#3670a5",
+    "--text-primary": "#ffffff",
+    "--text-secondary": "#ffeb3b",
+    "--text-tertiary": "#c0c0c0",
+    "--accent-primary": "#ffeb3b",
+    "--accent-secondary": "#ffffff",
+    "--accent-tertiary": "#c0c0c0",
+    "--border-primary": "#ffffff",
+    "--border-secondary": "#c0c0c0",
+    "--shadow-primary": "rgba(255, 235, 59, 0.3)",
+    "--shadow-secondary": "rgba(255, 255, 255, 0.2)",
+    "--gradient-1": "#0047ab",
+    "--gradient-2": "#ffffff",
+    "--gradient-3": "#ffeb3b",
+    "--overlay": "rgba(0, 71, 171, 0.9)",
+    "--hover-transform": "translateY(-3px)",
+    "--transition-speed": "0.3s",
+    "--animation-name": "grid-draw",
+    "--font-primary": "'Rajdhani', sans-serif",
+    "--font-secondary": "'Architects Daughter', cursive"
+  },
+  "animations": {
+    "background": "grid-draw",
+    "hover": "grid-draw",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": false,
+    "glitch": false,
+    "scanlines": false,
+    "grid": true,
+    "technical": true
+  },
+  "fonts": {
+    "primary": "Share Tech Mono",
+    "secondary": "Roboto Mono",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono+Roboto+Mono:wght@400;700&display=swap');"
+  }
+}

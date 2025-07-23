@@ -1,0 +1,48 @@
+{
+  "id": "volcanic",
+  "name": "Volcanic Forge",
+  "description": "Elemental fire and metalwork",
+  "emoji": "\ud83c\udf0b",
+  "variables": {
+    "--bg-primary": "#0a0a0a",
+    "--bg-secondary": "#1c1c1c",
+    "--bg-tertiary": "#2e2e2e",
+    "--text-primary": "#ff4500",
+    "--text-secondary": "#ffa500",
+    "--text-tertiary": "#ffff00",
+    "--accent-primary": "#ff4500",
+    "--accent-secondary": "#cf1020",
+    "--accent-tertiary": "#ffa500",
+    "--border-primary": "#ff4500",
+    "--border-secondary": "#bebebe",
+    "--shadow-primary": "rgba(255, 69, 0, 0.6)",
+    "--shadow-secondary": "rgba(207, 16, 32, 0.4)",
+    "--gradient-1": "#ff4500",
+    "--gradient-2": "#cf1020",
+    "--gradient-3": "#ffa500",
+    "--overlay": "rgba(10, 10, 10, 0.85)",
+    "--hover-transform": "translateY(-4px) scale(1.02)",
+    "--transition-speed": "0.4s",
+    "--animation-name": "lava-flow",
+    "--font-primary": "'Black Ops One', cursive",
+    "--font-secondary": "'Russo One', sans-serif"
+  },
+  "animations": {
+    "background": "lava-flow",
+    "hover": "lava-flow",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "lava": true,
+    "fire": true,
+    "smoke": true
+  },
+  "fonts": {
+    "primary": "Black Ops One",
+    "secondary": "Creepster",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One+Creepster:wght@400;700&display=swap');"
+  }
+}

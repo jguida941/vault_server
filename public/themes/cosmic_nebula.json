@@ -1,0 +1,47 @@
+{
+  "id": "cosmic",
+  "name": "Cosmic Nebula",
+  "description": "Interstellar space station interface",
+  "emoji": "\ud83c\udf0c",
+  "variables": {
+    "--bg-primary": "#000014",
+    "--bg-secondary": "#0a0a2e",
+    "--bg-tertiary": "#161650",
+    "--text-primary": "#ffffff",
+    "--text-secondary": "#ff1493",
+    "--text-tertiary": "#dda0dd",
+    "--accent-primary": "#6a0dad",
+    "--accent-secondary": "#ff1493",
+    "--accent-tertiary": "#00bfff",
+    "--border-primary": "#6a0dad",
+    "--border-secondary": "#ff1493",
+    "--shadow-primary": "rgba(106, 13, 173, 0.5)",
+    "--shadow-secondary": "rgba(255, 20, 147, 0.3)",
+    "--gradient-1": "#6a0dad",
+    "--gradient-2": "#ff1493",
+    "--gradient-3": "#00bfff",
+    "--overlay": "rgba(0, 0, 20, 0.8)",
+    "--hover-transform": "translateY(-5px) rotate(1deg)",
+    "--transition-speed": "0.4s",
+    "--animation-name": "nebula-swirl",
+    "--font-primary": "'Space Mono', monospace",
+    "--font-secondary": "'Exo 2', sans-serif"
+  },
+  "animations": {
+    "background": "nebula-swirl",
+    "hover": "nebula-swirl",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "stars": true,
+    "nebula": true
+  },
+  "fonts": {
+    "primary": "Space Mono",
+    "secondary": "Exo 2",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Space+Mono+Exo+2:wght@400;700&display=swap');"
+  }
+}

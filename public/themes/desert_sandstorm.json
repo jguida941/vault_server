@@ -1,0 +1,47 @@
+{
+  "id": "desert",
+  "name": "Desert Sandstorm",
+  "description": "Sahara desert expedition interface",
+  "emoji": "\ud83c\udfdc\ufe0f",
+  "variables": {
+    "--bg-primary": "#f4a460",
+    "--bg-secondary": "#deb887",
+    "--bg-tertiary": "#d2691e",
+    "--text-primary": "#8b4513",
+    "--text-secondary": "#a0522d",
+    "--text-tertiary": "#654321",
+    "--accent-primary": "#ff8c00",
+    "--accent-secondary": "#1e90ff",
+    "--accent-tertiary": "#ff6347",
+    "--border-primary": "#cc5500",
+    "--border-secondary": "#d2691e",
+    "--shadow-primary": "rgba(204, 85, 0, 0.3)",
+    "--shadow-secondary": "rgba(30, 144, 255, 0.2)",
+    "--gradient-1": "#ff8c00",
+    "--gradient-2": "#ffa500",
+    "--gradient-3": "#ffb347",
+    "--overlay": "rgba(244, 164, 96, 0.8)",
+    "--hover-transform": "translateY(-3px)",
+    "--transition-speed": "0.5s",
+    "--animation-name": "sand-drift",
+    "--font-primary": "'Amiri', serif",
+    "--font-secondary": "'Cairo', sans-serif"
+  },
+  "animations": {
+    "background": "sand-drift",
+    "hover": "sand-drift",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "sandParticles": true,
+    "heatWave": true
+  },
+  "fonts": {
+    "primary": "Amiri",
+    "secondary": "Roboto Slab",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Amiri+Roboto+Slab:wght@400;700&display=swap');"
+  }
+}

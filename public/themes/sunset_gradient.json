@@ -1,0 +1,47 @@
+{
+  "id": "sunset",
+  "name": "Sunset Gradient",
+  "description": "California sunset vibes",
+  "emoji": "\ud83c\udf07",
+  "variables": {
+    "--bg-primary": "#ff7f50",
+    "--bg-secondary": "#ff6347",
+    "--bg-tertiary": "#ff4500",
+    "--text-primary": "#ffffff",
+    "--text-secondary": "#fff8dc",
+    "--text-tertiary": "#fffacd",
+    "--accent-primary": "#ff1493",
+    "--accent-secondary": "#8a2be2",
+    "--accent-tertiary": "#191970",
+    "--border-primary": "#ff1493",
+    "--border-secondary": "#8a2be2",
+    "--shadow-primary": "rgba(255, 20, 147, 0.4)",
+    "--shadow-secondary": "rgba(138, 43, 226, 0.3)",
+    "--gradient-1": "#ff7f50",
+    "--gradient-2": "#ff1493",
+    "--gradient-3": "#8a2be2",
+    "--overlay": "rgba(255, 127, 80, 0.8)",
+    "--hover-transform": "translateY(-4px) scale(1.02)",
+    "--transition-speed": "0.5s",
+    "--animation-name": "sunset-glow",
+    "--font-primary": "'Dancing Script', cursive",
+    "--font-secondary": "'Pacifico', cursive"
+  },
+  "animations": {
+    "background": "sunset-glow",
+    "hover": "sunset-glow",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": false,
+    "glitch": false,
+    "scanlines": false,
+    "gradient": true,
+    "glow": true
+  },
+  "fonts": {
+    "primary": "Comfortaa",
+    "secondary": "Nunito",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Comfortaa+Nunito:wght@400;700&display=swap');"
+  }
+}

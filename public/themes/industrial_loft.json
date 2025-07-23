@@ -1,0 +1,47 @@
+{
+  "id": "industrial",
+  "name": "Industrial Loft",
+  "description": "Converted warehouse chic",
+  "emoji": "\ud83c\udfed",
+  "variables": {
+    "--bg-primary": "#2c2c2c",
+    "--bg-secondary": "#3d3d3d",
+    "--bg-tertiary": "#4e4e4e",
+    "--text-primary": "#ffffff",
+    "--text-secondary": "#ffa500",
+    "--text-tertiary": "#c0c0c0",
+    "--accent-primary": "#8b4513",
+    "--accent-secondary": "#71797e",
+    "--accent-tertiary": "#ffa500",
+    "--border-primary": "#71797e",
+    "--border-secondary": "#8b4513",
+    "--shadow-primary": "rgba(139, 69, 19, 0.4)",
+    "--shadow-secondary": "rgba(255, 165, 0, 0.2)",
+    "--gradient-1": "#8b4513",
+    "--gradient-2": "#71797e",
+    "--gradient-3": "#ffa500",
+    "--overlay": "rgba(44, 44, 44, 0.9)",
+    "--hover-transform": "translateY(-3px)",
+    "--transition-speed": "0.4s",
+    "--animation-name": "bulb-flicker",
+    "--font-primary": "'Oswald', sans-serif",
+    "--font-secondary": "'Barlow Condensed', sans-serif"
+  },
+  "animations": {
+    "background": "bulb-flicker",
+    "hover": "bulb-flicker",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "rust": true,
+    "metal": true
+  },
+  "fonts": {
+    "primary": "Oswald",
+    "secondary": "Anton",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Oswald+Anton:wght@400;700&display=swap');"
+  }
+}

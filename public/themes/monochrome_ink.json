@@ -1,0 +1,46 @@
+{
+  "id": "monochrome",
+  "name": "Monochrome Ink",
+  "description": "High contrast newspaper print",
+  "emoji": "\u26ab",
+  "variables": {
+    "--bg-primary": "#ffffff",
+    "--bg-secondary": "#f0f0f0",
+    "--bg-tertiary": "#e0e0e0",
+    "--text-primary": "#000000",
+    "--text-secondary": "#333333",
+    "--text-tertiary": "#666666",
+    "--accent-primary": "#000000",
+    "--accent-secondary": "#808080",
+    "--accent-tertiary": "#404040",
+    "--border-primary": "#000000",
+    "--border-secondary": "#808080",
+    "--shadow-primary": "rgba(0, 0, 0, 0.3)",
+    "--shadow-secondary": "rgba(0, 0, 0, 0.1)",
+    "--gradient-1": "#000000",
+    "--gradient-2": "#808080",
+    "--gradient-3": "#ffffff",
+    "--overlay": "rgba(255, 255, 255, 0.9)",
+    "--hover-transform": "translateY(-3px)",
+    "--transition-speed": "0.2s",
+    "--animation-name": "ink-bleed",
+    "--font-primary": "'Courier Prime', monospace",
+    "--font-secondary": "'Special Elite', cursive"
+  },
+  "animations": {
+    "background": "ink-bleed",
+    "hover": "ink-bleed",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": false,
+    "glitch": false,
+    "scanlines": false,
+    "halftone": true
+  },
+  "fonts": {
+    "primary": "IBM Plex Mono",
+    "secondary": "JetBrains Mono",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono+JetBrains+Mono:wght@400;700&display=swap');"
+  }
+}

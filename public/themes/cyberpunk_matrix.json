@@ -1,0 +1,46 @@
+{
+  "id": "default",
+  "name": "Cyberpunk Matrix",
+  "description": "Neo-Tokyo underground hacker aesthetic",
+  "emoji": "💻",
+  "variables": {
+    "--bg-primary": "#000000",
+    "--bg-secondary": "#0d0d0d",
+    "--bg-tertiary": "#1a1a1a",
+    "--text-primary": "#00ff41",
+    "--text-secondary": "#00cc33",
+    "--text-tertiary": "#888888",
+    "--accent-primary": "#00ff41",
+    "--accent-secondary": "#00cc33",
+    "--accent-tertiary": "#006600",
+    "--border-primary": "#00ff41",
+    "--border-secondary": "#333333",
+    "--shadow-primary": "rgba(0, 255, 65, 0.3)",
+    "--shadow-secondary": "rgba(0, 255, 65, 0.1)",
+    "--gradient-1": "#00ff41",
+    "--gradient-2": "#00cc33",
+    "--gradient-3": "#009900",
+    "--overlay": "rgba(0, 0, 0, 0.8)",
+    "--hover-transform": "translateY(-4px)",
+    "--transition-speed": "0.3s",
+    "--animation-name": "matrix-rain",
+    "--font-primary": "'Courier New', monospace",
+    "--font-secondary": "monospace"
+  },
+  "animations": {
+    "background": "matrix-rain",
+    "hover": "neon-pulse",
+    "accent": "matrix-rain"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": true,
+    "scanlines": true,
+    "matrixRain": true
+  },
+  "fonts": {
+    "primary": "Courier New",
+    "secondary": "monospace",
+    "import": null
+  }
+}

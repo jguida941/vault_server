@@ -1,0 +1,47 @@
+{
+  "id": "shadow",
+  "name": "Minimalist Shadow",
+  "description": "Extreme minimalism with depth",
+  "emoji": "\ud83d\udd32",
+  "variables": {
+    "--bg-primary": "#ffffff",
+    "--bg-secondary": "#f5f5f5",
+    "--bg-tertiary": "#e0e0e0",
+    "--text-primary": "#0d0d0d",
+    "--text-secondary": "#2a2a2a",
+    "--text-tertiary": "#4a4a4a",
+    "--accent-primary": "#000000",
+    "--accent-secondary": "#808080",
+    "--accent-tertiary": "#c0c0c0",
+    "--border-primary": "#d0d0d0",
+    "--border-secondary": "#e0e0e0",
+    "--shadow-primary": "rgba(0, 0, 0, 0.15)",
+    "--shadow-secondary": "rgba(0, 0, 0, 0.08)",
+    "--gradient-1": "#f5f5f5",
+    "--gradient-2": "#e0e0e0",
+    "--gradient-3": "#d0d0d0",
+    "--overlay": "rgba(255, 255, 255, 0.95)",
+    "--hover-transform": "translateY(-2px)",
+    "--transition-speed": "0.4s",
+    "--animation-name": "shadow-play",
+    "--font-primary": "'Inter', sans-serif",
+    "--font-secondary": "'Karla', sans-serif"
+  },
+  "animations": {
+    "background": "shadow-play",
+    "hover": "shadow-play",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": false,
+    "glitch": false,
+    "scanlines": false,
+    "depth": true,
+    "minimal": true
+  },
+  "fonts": {
+    "primary": "Jost",
+    "secondary": "Outfit",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Jost+Outfit:wght@400;700&display=swap');"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "biomorphic",
+  "name": "Biomorphic Flow",
+  "description": "Organic shapes inspired by Zaha Hadid",
+  "emoji": "\ud83c\udf38",
+  "variables": {
+    "--bg-primary": "#fdf5e6",
+    "--bg-secondary": "#f5ede0",
+    "--bg-tertiary": "#ffe5d9",
+    "--text-primary": "#2d4a3d",
+    "--text-secondary": "#4a6b5a",
+    "--text-tertiary": "#6b8e7c",
+    "--accent-primary": "#b8e6d0",
+    "--accent-secondary": "#ff9a8b",
+    "--accent-tertiary": "#87a96b",
+    "--border-primary": "#b8e6d0",
+    "--border-secondary": "#ff9a8b",
+    "--shadow-primary": "rgba(184, 230, 208, 0.4)",
+    "--shadow-secondary": "rgba(255, 154, 139, 0.3)",
+    "--gradient-1": "#b8e6d0",
+    "--gradient-2": "#ff9a8b",
+    "--gradient-3": "#fdf5e6",
+    "--overlay": "rgba(253, 245, 230, 0.85)",
+    "--hover-transform": "translateY(-4px) scale(1.03)",
+    "--transition-speed": "0.8s",
+    "--animation-name": "organic-morph",
+    "--font-primary": "'Quicksand', sans-serif",
+    "--font-secondary": "'Comfortaa', cursive"
+  },
+  "animations": {
+    "background": "organic-morph",
+    "hover": "organic-morph",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": false,
+    "glitch": false,
+    "scanlines": false,
+    "organic": true,
+    "flow": true
+  },
+  "fonts": {
+    "primary": "Poppins",
+    "secondary": "Rubik",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Poppins+Rubik:wght@400;700&display=swap');"
+  }
+}

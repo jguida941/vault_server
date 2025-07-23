@@ -1,0 +1,46 @@
+{
+  "id": "synthwave",
+  "name": "Synthwave Sunset",
+  "description": "80s Miami Vice meets Tron",
+  "emoji": "\ud83c\udf05",
+  "variables": {
+    "--bg-primary": "#1a0033",
+    "--bg-secondary": "#2d1b69",
+    "--bg-tertiary": "#3d2585",
+    "--text-primary": "#ff0080",
+    "--text-secondary": "#00ffff",
+    "--text-tertiary": "#ff6b35",
+    "--accent-primary": "#ff0080",
+    "--accent-secondary": "#00ffff",
+    "--accent-tertiary": "#ffff00",
+    "--border-primary": "#ff0080",
+    "--border-secondary": "#00ffff",
+    "--shadow-primary": "rgba(255, 0, 128, 0.5)",
+    "--shadow-secondary": "rgba(0, 255, 255, 0.3)",
+    "--gradient-1": "#ff0080",
+    "--gradient-2": "#00ffff",
+    "--gradient-3": "#ff6b35",
+    "--overlay": "rgba(26, 0, 51, 0.8)",
+    "--hover-transform": "translateY(-6px) scale(1.02)",
+    "--transition-speed": "0.4s",
+    "--animation-name": "neon-pulse",
+    "--font-primary": "'Orbitron', monospace",
+    "--font-secondary": "'Audiowide', monospace"
+  },
+  "animations": {
+    "background": "neon-pulse",
+    "hover": "neon-pulse",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": true,
+    "neonGlow": true
+  },
+  "fonts": {
+    "primary": "Orbitron",
+    "secondary": "Audiowide",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Orbitron+Audiowide:wght@400;700&display=swap');"
+  }
+}

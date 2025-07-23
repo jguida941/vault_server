@@ -1,0 +1,47 @@
+{
+  "id": "steampunk",
+  "name": "Steampunk Brass",
+  "description": "Victorian mechanical aesthetic",
+  "emoji": "\u2699\ufe0f",
+  "variables": {
+    "--bg-primary": "#3d2817",
+    "--bg-secondary": "#5d3a1a",
+    "--bg-tertiary": "#704214",
+    "--text-primary": "#f4e4c1",
+    "--text-secondary": "#d4af37",
+    "--text-tertiary": "#b87333",
+    "--accent-primary": "#b87333",
+    "--accent-secondary": "#cd7f32",
+    "--accent-tertiary": "#d4af37",
+    "--border-primary": "#b87333",
+    "--border-secondary": "#8b6914",
+    "--shadow-primary": "rgba(184, 115, 51, 0.4)",
+    "--shadow-secondary": "rgba(212, 175, 55, 0.2)",
+    "--gradient-1": "#b87333",
+    "--gradient-2": "#d4af37",
+    "--gradient-3": "#f4e4c1",
+    "--overlay": "rgba(61, 40, 23, 0.85)",
+    "--hover-transform": "translateY(-3px) rotate(-1deg)",
+    "--transition-speed": "0.3s",
+    "--animation-name": "gear-rotation",
+    "--font-primary": "'Cinzel', serif",
+    "--font-secondary": "'Playfair Display', serif"
+  },
+  "animations": {
+    "background": "gear-rotation",
+    "hover": "gear-rotation",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "gears": true,
+    "steam": true
+  },
+  "fonts": {
+    "primary": "Abril Fatface",
+    "secondary": "Playfair Display",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface+Playfair+Display:wght@400;700&display=swap');"
+  }
+}

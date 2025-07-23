@@ -1,0 +1,47 @@
+{
+  "id": "persian",
+  "name": "Persian Tapestry",
+  "description": "Ancient Persian luxury",
+  "emoji": "\ud83d\udd4c",
+  "variables": {
+    "--bg-primary": "#6a0dad",
+    "--bg-secondary": "#7b1fa2",
+    "--bg-tertiary": "#8e24aa",
+    "--text-primary": "#ffd700",
+    "--text-secondary": "#ffffff",
+    "--text-tertiary": "#e0e0e0",
+    "--accent-primary": "#0f52ba",
+    "--accent-secondary": "#e0115f",
+    "--accent-tertiary": "#ffd700",
+    "--border-primary": "#ffd700",
+    "--border-secondary": "#0f52ba",
+    "--shadow-primary": "rgba(255, 215, 0, 0.5)",
+    "--shadow-secondary": "rgba(224, 17, 95, 0.3)",
+    "--gradient-1": "#6a0dad",
+    "--gradient-2": "#0f52ba",
+    "--gradient-3": "#e0115f",
+    "--overlay": "rgba(106, 13, 173, 0.8)",
+    "--hover-transform": "translateY(-4px) scale(1.05)",
+    "--transition-speed": "0.6s",
+    "--animation-name": "silk-shimmer",
+    "--font-primary": "'Scheherazade New', serif",
+    "--font-secondary": "'Vazirmatn', sans-serif"
+  },
+  "animations": {
+    "background": "silk-shimmer",
+    "hover": "silk-shimmer",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "patterns": true,
+    "tapestry": true
+  },
+  "fonts": {
+    "primary": "Vazirmatn",
+    "secondary": "Markazi Text",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Vazirmatn+Markazi+Text:wght@400;700&display=swap');"
+  }
+}

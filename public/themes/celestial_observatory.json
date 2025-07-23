@@ -1,0 +1,47 @@
+{
+  "id": "celestial",
+  "name": "Celestial Observatory",
+  "description": "Ancient astronomy meets modern space",
+  "emoji": "\ud83d\udd2d",
+  "variables": {
+    "--bg-primary": "#191970",
+    "--bg-secondary": "#000033",
+    "--bg-tertiary": "#2d2d5a",
+    "--text-primary": "#ffd700",
+    "--text-secondary": "#f8f8ff",
+    "--text-tertiary": "#c0c0c0",
+    "--accent-primary": "#ffd700",
+    "--accent-secondary": "#8b008b",
+    "--accent-tertiary": "#f8f8ff",
+    "--border-primary": "#ffd700",
+    "--border-secondary": "#8b008b",
+    "--shadow-primary": "rgba(255, 215, 0, 0.4)",
+    "--shadow-secondary": "rgba(139, 0, 139, 0.3)",
+    "--gradient-1": "#191970",
+    "--gradient-2": "#ffd700",
+    "--gradient-3": "#8b008b",
+    "--overlay": "rgba(25, 25, 112, 0.85)",
+    "--hover-transform": "translateY(-4px) rotate(360deg)",
+    "--transition-speed": "1.5s",
+    "--animation-name": "constellation-trace",
+    "--font-primary": "'Cinzel', serif",
+    "--font-secondary": "'Cormorant Garamond', serif"
+  },
+  "animations": {
+    "background": "constellation-trace",
+    "hover": "constellation-trace",
+    "accent": "gradient-shift"
+  },
+  "effects": {
+    "particles": true,
+    "glitch": false,
+    "scanlines": false,
+    "stars": true,
+    "constellation": true
+  },
+  "fonts": {
+    "primary": "Philosopher",
+    "secondary": "Spectral",
+    "import": "@import url('https://fonts.googleapis.com/css2?family=Philosopher+Spectral:wght@400;700&display=swap');"
+  }
+}
