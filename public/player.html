@@ -174,7 +174,12 @@
             // Filter videos based on category and private mode
             playlist = vaultVideos.filter(video => {
                 if (!privateMode && video.isPrivate) return false;
-                if (currentCategory !== 'all' && video.category !== currentCategory) return false;
+                if (currentCategory !== 'all') {
+                    // Normalize both categories for comparison
+                    const normalizedVideoCategory = video.category.toLowerCase().replace(/\s+/g, '-');
+                    const normalizedCurrentCategory = currentCategory.toLowerCase().replace(/\s+/g, '-');
+                    if (normalizedVideoCategory !== normalizedCurrentCategory) return false;
+                }
                 return true;
             });
             
