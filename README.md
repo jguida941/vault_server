@@ -2,6 +2,27 @@
 
 A clean, ad-free YouTube music player that lets you build and manage your own music collection with auto-play functionality.
 
+## 🎨 Latest Updates (July 2025)
+
+### Major Theme System Overhaul
+- **40 Unique Themes**: Each theme now has completely distinct visual personality
+- **Dynamic Typography**: Unique fonts, weights (300-900), letter spacing for each theme
+- **Custom Button Styles**: Theme-specific gradients, shadows, and hover effects
+- **No More Italics**: Replaced all cursive fonts with readable alternatives
+- **Full Theme Coverage**: All UI elements now respond to theme changes
+- **Theme Examples**:
+  - Synthwave: Neon gradients with glow effects
+  - Brutalist: No border radius, heavy shadows
+  - Terminal: Green text on black with blinking cursor
+  - Glass: Transparent with backdrop blur
+  - Memphis: Geometric shadows and bold colors
+
+### Bug Fixes
+- Fixed "Play Current Category Only" button - now correctly filters videos by category
+- Improved text readability on light themes with subtle shadows
+- Fixed CSS vendor prefix warnings for better browser compatibility
+- All hardcoded colors replaced with theme variables
+
 ## Features
 
 ### Current Features
