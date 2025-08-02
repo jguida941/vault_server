@@ -1,15 +1,77 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const ytdl = require('ytdl-core');
+const axios = require('axios');
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8888;
 
-// Serve static files
+// Middleware
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Redirect root to working.html
 app.get('/', (req, res) => {
     res.redirect('/working.html');
+});
+
+// YouTube API endpoint for fetching channel videos
+app.get('/api/youtube/channel/:channelId', async (req, res) => {
+  try {
+    const { channelId } = req.params;
+    const apiKey = process.env.YOUTUBE_API_KEY;
+    
+    if (!apiKey) {
+      // Fallback to mock data if no API key
+      return res.json({
+        items: [
+          { id: { videoId: 'dQw4w9WgXcQ' }, snippet: { title: 'Sample Video 1', channelTitle: 'Sample Channel' }},
+          { id: { videoId: 'jNQXAC9IVRw' }, snippet: { title: 'Sample Video 2', channelTitle: 'Sample Channel' }}
+        ]
+      });
+    }
+    
+    const response = await axios.get(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=20&order=date&type=video&key=${apiKey}`
+    );
+    
+    res.json(response.data);
+  } catch (error) {
+    console.error('YouTube API error:', error);
+    res.status(500).json({ error: 'Failed to fetch channel videos' });
+  }
+});
+
+// Download endpoint for podcasts
+app.post('/api/download', async (req, res) => {
+  try {
+    const { videoId } = req.body;
+    
+    if (!videoId) {
+      return res.status(400).json({ error: 'Video ID required' });
+    }
+    
+    // Get video info
+    const info = await ytdl.getInfo(videoId);
+    const audioFormat = ytdl.chooseFormat(info.formats, { quality: 'highestaudio' });
+    
+    if (!audioFormat) {
+      return res.status(404).json({ error: 'No audio format found' });
+    }
+    
+    // Set headers for audio download
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Disposition', `attachment; filename="${info.videoDetails.title}.mp3"`);
+    
+    // Stream the audio
+    ytdl(videoId, { format: audioFormat })
+      .pipe(res);
+      
+  } catch (error) {
+    console.error('Download error:', error);
+    res.status(500).json({ error: 'Failed to download audio' });
+  }
 });
 
 // Direct embed endpoint - uses YouTube's own embed

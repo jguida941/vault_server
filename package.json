@@ -1,18 +1,65 @@
 {
-  "name": "vault-server",
-  "version": "1.0.0",
-  "description": "Ad-free YouTube music player server - no ads, no embeds, just music",
-  "main": "server.js",
+  "name": "the-vault",
+  "version": "2.0.0",
+  "description": "Ad-free YouTube music player - no ads, no embeds, just music",
+  "main": "desktop/electron.js",
   "scripts": {
     "start": "node server.js",
     "stop": "if [ -f .pid ]; then kill $(cat .pid) && rm .pid && echo '✅ Server stopped'; else pkill -f 'node server.js' || echo 'Server not running'; fi",
     "restart": "npm run stop && npm start",
     "dev": "node server.js",
-    "open": "open http://localhost:8080/working.html",
-    "vault": "npm start & sleep 2 && npm run open"
+    "open": "open http://localhost:8888/working.html",
+    "vault": "npm start & sleep 2 && npm run open",
+    "tauri": "./scripts/run-vault.sh",
+    "tauri-build": "source ~/.cargo/env && cd desktop && cargo tauri build",
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_IS_DEV=1 electron .",
+    "dist": "electron-builder",
+    "dist-mac": "electron-builder --mac",
+    "dist-win": "electron-builder --win",
+    "dist-linux": "electron-builder --linux",
+    "dist-all": "electron-builder -mwl",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
     "express": "^4.18.2",
     "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.vault.musicplayer",
+    "productName": "The Vault",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist",
+      "!.git",
+      "!.github",
+      "!docs",
+      "!*.log",
+      "!.pid"
+    ],
+    "mac": {
+      "category": "public.app-category.music",
+      "icon": "icons/icon.icns"
+    },
+    "win": {
+      "icon": "icons/icon.ico"
+    },
+    "linux": {
+      "icon": "icons/icon.png",
+      "category": "AudioVideo"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }

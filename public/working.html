@@ -2351,6 +2351,261 @@
         .launcher-tile p {
             color: var(--text-secondary);
         }
+        
+        /* Podcast Mode Styles */
+        .podcast-quick-add {
+            background: var(--bg-secondary);
+            color: #ff3b3b;
+            border: 2px solid #ff3b3b;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius, 8px);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .podcast-quick-add:hover {
+            background: #ff3b3b;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 59, 59, 0.4);
+        }
+        
+        .podcast-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-secondary);
+            border-radius: var(--border-radius, 15px);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .podcast-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 59, 59, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .podcast-card:hover::before {
+            opacity: 1;
+        }
+        
+        .podcast-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff3b3b;
+            box-shadow: 0 10px 30px rgba(255, 59, 59, 0.3);
+        }
+        
+        .podcast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff3b3b, #ff6b6b);
+            transition: width 0.3s ease;
+        }
+        
+        .episode-duration {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Radio Mode Styles */
+        .radio-category-btn {
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius, 25px);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .radio-category-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .radio-category-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .radio-category-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .radio-station {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-secondary);
+            border-radius: var(--border-radius, 15px);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .radio-station::after {
+            content: '📻';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 4rem;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+            transition: all 0.3s ease;
+        }
+        
+        .radio-station:hover::after {
+            transform: rotate(0deg) scale(1.2);
+            opacity: 0.2;
+        }
+        
+        .radio-station:hover {
+            transform: translateY(-5px);
+            border-color: #3b82ff;
+            box-shadow: 0 10px 30px rgba(59, 130, 255, 0.3);
+            background: linear-gradient(135deg, var(--bg-secondary), rgba(59, 130, 255, 0.1));
+        }
+        
+        .radio-control-btn {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid #3b82ff;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius, 8px);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-control-btn:hover {
+            background: #3b82ff;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(59, 130, 255, 0.4);
+        }
+        
+        .radio-visualizer {
+            height: 100px;
+            background: linear-gradient(135deg, transparent, rgba(59, 130, 255, 0.1));
+            border-radius: var(--border-radius, 10px);
+            margin: 1rem 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 0.5rem;
+            gap: 2px;
+        }
+        
+        .radio-bar {
+            width: 4px;
+            background: linear-gradient(to top, #3b82ff, #00ffff);
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        
+        @keyframes wave {
+            0%, 100% { height: 20%; }
+            50% { height: var(--height, 80%); }
+        }
+        
+        /* Download Indicator */
+        .download-status {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .download-status.downloaded {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+        }
+        
+        .download-status.downloading {
+            background: rgba(255, 165, 0, 0.2);
+            border: 2px solid orange;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        /* Continue Listening Section */
+        .continue-section {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius, 15px);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--border-secondary);
+        }
+        
+        .continue-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius, 10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .continue-card:hover {
+            transform: translateX(5px);
+            box-shadow: -5px 0 20px rgba(255, 59, 59, 0.3);
+        }
+        
+        .continue-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff3b3b, #ff6b6b);
+            transition: width 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -2516,6 +2771,77 @@
     
     </div> <!-- End musicPlayerMode -->
     
+    <!-- Podcast Mode -->
+    <div id="podcastMode" style="display: none; padding: 2rem; min-height: 100vh;">
+        <button onclick="switchToMode('launcher')" style="position: fixed; top: 20px; left: 20px; background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--border-primary); padding: 0.8rem 1.5rem; border-radius: var(--border-radius, 8px); cursor: pointer; z-index: 1000; font-size: 1rem;">
+            ← Back to Launcher
+        </button>
+        
+        <div style="max-width: 1400px; margin: 0 auto; padding-top: 80px;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">🎙️ Podcast Player</h1>
+            
+            <!-- Add Podcast Section -->
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: var(--border-radius, 15px); margin-bottom: 3rem; border: 2px solid var(--border-secondary);">
+                <h2 style="color: #ff3b3b; margin-bottom: 1.5rem;">Add Podcast</h2>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="text" id="podcastInput" placeholder="Enter podcast RSS feed URL or YouTube playlist URL" 
+                        style="flex: 1; min-width: 300px; padding: 1rem; background: var(--bg-primary); color: var(--text-primary); border: 2px solid var(--border-secondary); border-radius: var(--border-radius, 8px); font-size: 1rem;">
+                    <button onclick="addPodcast()" 
+                        style="background: linear-gradient(135deg, #ff3b3b, #ff6b6b); color: white; border: none; padding: 1rem 2rem; border-radius: var(--border-radius, 8px); cursor: pointer; font-size: 1rem; font-weight: bold;">
+                        + Add Podcast
+                    </button>
+                </div>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="addPopularPodcast('JRE')" class="podcast-quick-add">+ Joe Rogan Experience</button>
+                    <button onclick="addPopularPodcast('Flagrant')" class="podcast-quick-add">+ Flagrant</button>
+                    <button onclick="addPopularPodcast('ThisPastWeekend')" class="podcast-quick-add">+ This Past Weekend</button>
+                    <button onclick="addPopularPodcast('Impaulsive')" class="podcast-quick-add">+ Impaulsive</button>
+                </div>
+            </div>
+            
+            <!-- Podcast List -->
+            <div id="podcastList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+                <!-- Podcasts will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Radio Mode -->
+    <div id="radioMode" style="display: none; padding: 2rem; min-height: 100vh;">
+        <button onclick="switchToMode('launcher')" style="position: fixed; top: 20px; left: 20px; background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--border-primary); padding: 0.8rem 1.5rem; border-radius: var(--border-radius, 8px); cursor: pointer; z-index: 1000; font-size: 1rem;">
+            ← Back to Launcher
+        </button>
+        
+        <div style="max-width: 1400px; margin: 0 auto; padding-top: 80px;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">📻 Radio Mode</h1>
+            
+            <!-- Station Categories -->
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem;">
+                <button onclick="loadRadioCategory('hiphop')" class="radio-category-btn" style="background: linear-gradient(135deg, #ff0066, #ff3366);">Hip Hop</button>
+                <button onclick="loadRadioCategory('electronic')" class="radio-category-btn" style="background: linear-gradient(135deg, #00ffff, #0099ff);">Electronic</button>
+                <button onclick="loadRadioCategory('rock')" class="radio-category-btn" style="background: linear-gradient(135deg, #ff6600, #ff9900);">Rock</button>
+                <button onclick="loadRadioCategory('chill')" class="radio-category-btn" style="background: linear-gradient(135deg, #9933ff, #cc66ff);">Chill</button>
+                <button onclick="loadRadioCategory('live')" class="radio-category-btn" style="background: linear-gradient(135deg, #00ff66, #00cc99);">Live Radio</button>
+            </div>
+            
+            <!-- Now Playing -->
+            <div id="radioNowPlaying" style="background: var(--bg-secondary); padding: 2rem; border-radius: var(--border-radius, 15px); margin-bottom: 3rem; border: 2px solid var(--border-secondary); text-align: center; display: none;">
+                <h3 style="color: #3b82ff; margin-bottom: 1rem;">Now Playing</h3>
+                <div id="radioPlayerContainer"></div>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+                    <button onclick="previousStation()" class="radio-control-btn">⏮️ Previous</button>
+                    <button onclick="toggleRadioPlay()" class="radio-control-btn" id="radioPlayPause">⏸️ Pause</button>
+                    <button onclick="nextStation()" class="radio-control-btn">⏭️ Next</button>
+                </div>
+            </div>
+            
+            <!-- Station Grid -->
+            <div id="radioStations" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
+                <!-- Radio stations will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+    
     <!-- Settings Mode -->
     <div id="settingsMode" style="display: none; padding: 2rem; min-height: 100vh;">
         <button onclick="switchToMode('launcher')" style="position: fixed; top: 20px; left: 20px; background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--border-primary); padding: 0.8rem 1.5rem; border-radius: var(--border-radius, 8px); cursor: pointer; z-index: 1000; font-size: 1rem;">
@@ -2569,6 +2895,44 @@
         let currentAppMode = 'launcher';
         let currentTheme = localStorage.getItem('vaultTheme') || 'default';
         
+        // Auto-compact when memory usage is high
+        function checkMemoryAndCompact() {
+            const storageSize = new Blob([JSON.stringify(localStorage)]).size;
+            const maxSize = 5 * 1024 * 1024; // 5MB threshold
+            const warningSize = 4 * 1024 * 1024; // 4MB warning
+            
+            if (storageSize > maxSize) {
+                performAutoCompact();
+            } else if (storageSize > warningSize) {
+                const sizeInMB = Math.round(storageSize / 1024 / 1024 * 100) / 100;
+                showToast(`⚠️ Storage at ${sizeInMB}MB - consider cleaning up`);
+            }
+        }
+        
+        function performAutoCompact() {
+            // Remove old watch progress data
+            vaultVideos.forEach(video => {
+                if (video.watchProgress && video.watchProgress > 0.95) {
+                    delete video.watchProgress;
+                }
+            });
+            
+            // Remove duplicate videos
+            const uniqueVideos = [];
+            const seenIds = new Set();
+            vaultVideos.forEach(video => {
+                if (!seenIds.has(video.id)) {
+                    seenIds.add(video.id);
+                    uniqueVideos.push(video);
+                }
+            });
+            vaultVideos = uniqueVideos;
+            
+            // Save compacted data
+            localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+            showToast('🧹 Memory auto-compacted!');
+        }
+        
         // Theme definitions
         const themes = [
             { id: 'default', name: 'Cyberpunk Matrix', emoji: '💻', colors: ['#000000', '#00ff41'], description: 'Neo-Tokyo underground hacker aesthetic' },
@@ -2617,6 +2981,8 @@
             // Hide all modes
             document.getElementById('appLauncher').style.display = 'none';
             document.getElementById('musicPlayerMode').style.display = 'none';
+            document.getElementById('podcastMode').style.display = 'none';
+            document.getElementById('radioMode').style.display = 'none';
             document.getElementById('settingsMode').style.display = 'none';
             
             switch(mode) {
@@ -2629,10 +2995,14 @@
                     updateStats();
                     break;
                 case 'podcast':
-                    showToast('🎙️ Podcast mode coming soon!');
+                    document.getElementById('podcastMode').style.display = 'block';
+                    currentAppMode = 'podcast';
+                    loadPodcastMode();
                     break;
                 case 'radio':
-                    showToast('📻 Radio mode coming soon!');
+                    document.getElementById('radioMode').style.display = 'block';
+                    currentAppMode = 'radio';
+                    loadRadioMode();
                     break;
                 case 'analytics':
                     showToast('📊 Analytics coming soon!');
@@ -2658,6 +3028,349 @@
             document.getElementById('launcherTrackCount').textContent = vaultVideos.length;
             document.getElementById('launcherCategoryCount').textContent = vaultCategories.length;
             document.getElementById('launcherMode').textContent = privateMode ? 'Private' : 'Public';
+        }
+        
+        // Podcast Mode Functions
+        function loadPodcastMode() {
+            const podcastVideos = vaultVideos.filter(v => v.category === 'Podcast 🎙️');
+            const continueListening = podcastVideos.filter(v => v.watchProgress && v.watchProgress > 0 && v.watchProgress < 0.95);
+            const podcastList = document.getElementById('podcastList');
+            
+            podcastList.innerHTML = '';
+            
+            // Continue Listening Section
+            if (continueListening.length > 0) {
+                const continueSection = document.createElement('div');
+                continueSection.className = 'continue-section';
+                continueSection.style.gridColumn = '1 / -1';
+                continueSection.innerHTML = `
+                    <h2 style="color: #ff3b3b; margin-bottom: 1rem;">🎧 Continue Listening</h2>
+                    <div style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 0.5rem;">
+                        ${continueListening.map(video => `
+                            <div class="continue-card" onclick="playPodcastEpisode('${video.id}')" style="min-width: 300px;">
+                                <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" 
+                                     style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                <div style="flex: 1;">
+                                    <h4 style="margin: 0; color: var(--text-primary); font-size: 0.9rem;">${video.title}</h4>
+                                    <p style="margin: 0.2rem 0 0 0; color: var(--text-secondary); font-size: 0.8rem;">
+                                        ${Math.floor(video.watchProgress * 100)}% complete
+                                    </p>
+                                </div>
+                                <div class="continue-progress" style="width: ${video.watchProgress * 100}%;"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                podcastList.appendChild(continueSection);
+            }
+            
+            // All Podcast Episodes
+            podcastVideos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'podcast-card';
+                card.innerHTML = `
+                    <div style="position: relative;">
+                        <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" 
+                             style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                        <span class="episode-duration">${video.duration || '00:00'}</span>
+                        ${video.downloadStatus === 'complete' ? '<div class="download-status downloaded">⬇️</div>' : ''}
+                        ${video.downloadStatus === 'downloading' ? '<div class="download-status downloading">⏳</div>' : ''}
+                    </div>
+                    <h3 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.1rem;">${video.title}</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Added ${new Date(video.addedDate).toLocaleDateString()}
+                    </p>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="playPodcastEpisode('${video.id}')" 
+                                style="flex: 1; background: #ff3b3b; color: white; border: none; padding: 0.5rem; border-radius: 6px; cursor: pointer;">
+                            ▶️ Play
+                        </button>
+                        <button onclick="downloadPodcast('${video.id}')" 
+                                style="background: var(--bg-primary); color: var(--text-primary); border: 2px solid var(--border-secondary); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">
+                            ⬇️
+                        </button>
+                    </div>
+                    ${video.watchProgress ? `<div class="podcast-progress" style="width: ${video.watchProgress * 100}%;"></div>` : ''}
+                `;
+                podcastList.appendChild(card);
+            });
+            
+            // If no podcasts
+            if (podcastVideos.length === 0) {
+                podcastList.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <p style="color: var(--text-secondary); font-size: 1.2rem;">No podcasts yet. Add some using the buttons above!</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function addPodcast() {
+            const input = document.getElementById('podcastInput');
+            const url = input.value.trim();
+            if (!url) return;
+            
+            // Extract video ID same as loadVideo
+            const videoIdMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+            if (videoIdMatch) {
+                const videoId = videoIdMatch[1];
+                const title = prompt('Enter podcast episode title:') || 'Podcast Episode';
+                
+                const video = {
+                    id: videoId,
+                    title: title,
+                    category: 'Podcast 🎙️',
+                    isPrivate: false,
+                    addedDate: Date.now(),
+                    watchProgress: 0,
+                    downloadStatus: 'none'
+                };
+                
+                vaultVideos.push(video);
+                localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+                input.value = '';
+                loadPodcastMode();
+                showToast('🎙️ Podcast episode added!');
+            }
+        }
+        
+        async function addPopularPodcast(channel) {
+            const channels = {
+                'JRE': 'UCzQUP1qoWDoEbmsQxvdjxgQ',
+                'Flagrant': 'UCxhkJEiGtm9X-Qn4qNh8m_Q',
+                'ThisPastWeekend': 'UCLyPL-Ev7qtUF4kTBqNQAKQ',
+                'Impaulsive': 'UCGeBogGDZ9W3dsGx-mWQGJA'
+            };
+            
+            showToast(`🎙️ Loading ${channel} episodes...`);
+            
+            try {
+                const response = await fetch(`/api/youtube/channel/${channels[channel]}`);
+                const data = await response.json();
+                
+                if (data.items && data.items.length > 0) {
+                    // Add first 5 episodes
+                    const episodes = data.items.slice(0, 5);
+                    episodes.forEach(item => {
+                        const video = {
+                            id: item.id.videoId,
+                            title: item.snippet.title,
+                            category: 'Podcast 🎙️',
+                            isPrivate: false,
+                            addedDate: Date.now(),
+                            watchProgress: 0,
+                            downloadStatus: 'none',
+                            channelTitle: item.snippet.channelTitle
+                        };
+                        
+                        // Check if not already added
+                        if (!vaultVideos.find(v => v.id === video.id)) {
+                            vaultVideos.push(video);
+                        }
+                    });
+                    
+                    localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+                    loadPodcastMode();
+                    showToast(`✅ Added ${episodes.length} ${channel} episodes!`);
+                } else {
+                    showToast('❌ No episodes found');
+                }
+            } catch (error) {
+                console.error('Error fetching channel:', error);
+                showToast('❌ Failed to load episodes');
+            }
+        }
+        
+        function playPodcastEpisode(videoId) {
+            // Open in player with timestamp if has progress
+            const video = vaultVideos.find(v => v.id === videoId);
+            const startTime = video && video.watchProgress ? Math.floor(video.watchProgress * 100) : 0;
+            
+            window.open(`player.html?ids=${videoId}&start=${startTime}`, 'vaultPlayer', 
+                'width=800,height=600,toolbar=no,location=no,status=no,menubar=no');
+        }
+        
+        async function downloadPodcast(videoId) {
+            const video = vaultVideos.find(v => v.id === videoId);
+            if (video) {
+                video.downloadStatus = 'downloading';
+                localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+                loadPodcastMode();
+                
+                try {
+                    const response = await fetch('/api/download', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ videoId })
+                    });
+                    
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `${video.title}.mp3`;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                        
+                        video.downloadStatus = 'complete';
+                        localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+                        loadPodcastMode();
+                        showToast('⬇️ Episode downloaded!');
+                    } else {
+                        throw new Error('Download failed');
+                    }
+                } catch (error) {
+                    console.error('Download error:', error);
+                    video.downloadStatus = 'none';
+                    localStorage.setItem('vaultVideos', JSON.stringify(vaultVideos));
+                    loadPodcastMode();
+                    showToast('❌ Download failed');
+                }
+            }
+        }
+        
+        // Radio Mode Functions
+        let currentRadioCategory = 'all';
+        let radioStations = [];
+        let currentStationIndex = 0;
+        let radioPlayer = null;
+        
+        function loadRadioMode() {
+            loadRadioCategory('all');
+        }
+        
+        function loadRadioCategory(category) {
+            currentRadioCategory = category;
+            const stationsContainer = document.getElementById('radioStations');
+            stationsContainer.innerHTML = '';
+            
+            if (category === 'live') {
+                // Live radio stations
+                const liveStations = [
+                    { name: 'Lofi Girl - Beats to Study/Relax', id: 'jfKfPfyJRdk', type: 'live' },
+                    { name: 'Lofi Girl - Sleep/Chill Beats', id: 'rUxyKA_-grg', type: 'live' },
+                    { name: 'Coffee Shop Radio ☕ 24/7', id: '-5KAN9_CzSA', type: 'live' },
+                    { name: 'The Good Life Radio • 24/7', id: '36YnV9STBqc', type: 'live' },
+                    { name: 'Chillhop Radio - Jazzy & Lofi', id: '5yx6BWlEVcY', type: 'live' },
+                    { name: 'lofi hip hop radio 📚', id: 'lTRiuFIWV54', type: 'live' }
+                ];
+                
+                liveStations.forEach(station => {
+                    const stationEl = document.createElement('div');
+                    stationEl.className = 'radio-station';
+                    stationEl.innerHTML = `
+                        <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">${station.name}</h3>
+                        <p style="color: #00ff00; font-size: 0.9rem; margin-bottom: 1rem;">🔴 LIVE</p>
+                        <button onclick="playRadioStation('${station.id}', '${station.name}')" 
+                                style="background: #3b82ff; color: white; border: none; padding: 0.8rem 2rem; border-radius: 20px; cursor: pointer; font-weight: bold;">
+                            ▶️ Tune In
+                        </button>
+                    `;
+                    stationsContainer.appendChild(stationEl);
+                });
+            } else {
+                // Create stations from your collection
+                const categoryVideos = category === 'all' ? vaultVideos : 
+                    vaultVideos.filter(v => v.category.toLowerCase().includes(category));
+                
+                if (categoryVideos.length > 0) {
+                    radioStations = [...categoryVideos].sort(() => Math.random() - 0.5);
+                    
+                    const stationEl = document.createElement('div');
+                    stationEl.className = 'radio-station';
+                    stationEl.style.gridColumn = '1 / -1';
+                    stationEl.innerHTML = `
+                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">
+                            📻 ${category === 'all' ? 'All Music' : category.charAt(0).toUpperCase() + category.slice(1)} Radio
+                        </h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                            ${categoryVideos.length} tracks • Shuffled playlist
+                        </p>
+                        <div class="radio-visualizer">
+                            ${Array(20).fill(0).map((_, i) => 
+                                `<div class="radio-bar" style="--i: ${i}; --height: ${Math.random() * 60 + 20}%;"></div>`
+                            ).join('')}
+                        </div>
+                        <button onclick="startRadioStation()" 
+                                style="background: linear-gradient(135deg, #3b82ff, #00ffff); color: white; border: none; padding: 1rem 3rem; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 1.2rem; margin-top: 1.5rem;">
+                            ▶️ Start Radio
+                        </button>
+                    `;
+                    stationsContainer.appendChild(stationEl);
+                } else {
+                    stationsContainer.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                            <p style="color: var(--text-secondary); font-size: 1.2rem;">
+                                No tracks in this category. Add some music first!
+                            </p>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        function playRadioStation(videoId, name) {
+            document.getElementById('radioNowPlaying').style.display = 'block';
+            document.getElementById('radioPlayerContainer').innerHTML = `
+                <iframe width="100%" height="200" 
+                    src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=1" 
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                </iframe>
+                <h3 style="margin-top: 1rem; color: var(--text-primary);">${name}</h3>
+            `;
+        }
+        
+        function startRadioStation() {
+            if (radioStations.length === 0) return;
+            
+            currentStationIndex = 0;
+            const videoIds = radioStations.map(v => v.id).join(',');
+            
+            window.open(`player.html?ids=${videoIds}&shuffle=true&autoplay=true`, 'radioPlayer', 
+                'width=800,height=600,toolbar=no,location=no,status=no,menubar=no');
+            
+            document.getElementById('radioNowPlaying').style.display = 'block';
+            updateRadioNowPlaying();
+        }
+        
+        function updateRadioNowPlaying() {
+            if (radioStations.length === 0) return;
+            
+            const current = radioStations[currentStationIndex];
+            document.getElementById('radioPlayerContainer').innerHTML = `
+                <h3 style="color: var(--text-primary);">Now Playing: ${current.title}</h3>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                    Track ${currentStationIndex + 1} of ${radioStations.length}
+                </p>
+            `;
+        }
+        
+        function previousStation() {
+            if (currentStationIndex > 0) {
+                currentStationIndex--;
+                updateRadioNowPlaying();
+            }
+        }
+        
+        function nextStation() {
+            if (currentStationIndex < radioStations.length - 1) {
+                currentStationIndex++;
+                updateRadioNowPlaying();
+            }
+        }
+        
+        function toggleRadioPlay() {
+            const btn = document.getElementById('radioPlayPause');
+            if (btn.textContent.includes('Pause')) {
+                btn.textContent = '▶️ Play';
+            } else {
+                btn.textContent = '⏸️ Pause';
+            }
         }
         
         function showToast(message, type = 'success') {
@@ -3739,6 +4452,9 @@
         
         // Initialize theme on page load
         (async function initializeTheme() {
+            // Check memory on startup
+            checkMemoryAndCompact();
+            
             // Load theme index
             await loadThemeIndex();
             

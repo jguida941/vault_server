@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2.0.0",
+  "productName": "The Vault",
+  "version": "2.0.0",
+  "identifier": "com.vault.musicplayer",
+  "build": {
+    "beforeBuildCommand": "",
+    "beforeDevCommand": "",
+    "devUrl": "http://localhost:8888/working.html",
+    "frontendDist": "./public"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "The Vault - YouTube Music Player",
+        "width": 1400,
+        "height": 900,
+        "resizable": true,
+        "maximized": false,
+        "decorations": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [],
+    "category": "Music",
+    "shortDescription": "Ad-free YouTube music player",
+    "longDescription": "A clean, ad-free YouTube music player that lets you build and manage your own music collection with auto-play functionality.",
+    "macOS": {
+      "frameworks": [],
+      "minimumSystemVersion": "10.13",
+      "exceptionDomain": "localhost"
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    }
+  },
+  "plugins": {}
+}

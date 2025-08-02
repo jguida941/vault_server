@@ -123,6 +123,21 @@
             <button class="control-btn" onclick="nextVideo()">⏭️ Next</button>
             <button class="control-btn" id="shuffleBtn" onclick="toggleShuffle()">🔀 Shuffle</button>
             <button class="control-btn" id="repeatBtn" onclick="toggleRepeat()">🔁 Repeat</button>
+            <select class="control-btn" id="speedSelect" onchange="changeSpeed()">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+            </select>
+            <select class="control-btn" id="sleepTimer" onchange="setSleepTimer()">
+                <option value="0">Sleep Timer</option>
+                <option value="15">15 min</option>
+                <option value="30">30 min</option>
+                <option value="60">1 hour</option>
+                <option value="120">2 hours</option>
+            </select>
             <button class="control-btn" onclick="toggleQueue()">📜 Queue</button>
         </div>
     </div>
@@ -157,6 +172,8 @@
         let currentIndex = 0;
         let isPlaying = true;
         let playlist = [];
+        let sleepTimerId = null;
+        let currentSpeed = 1;
         
         // Initialize YouTube Player API
         const tag = document.createElement('script');
@@ -389,7 +406,52 @@
             updateQueueDisplay();
         }
         
+        function changeSpeed() {
+            const speedSelect = document.getElementById('speedSelect');
+            currentSpeed = parseFloat(speedSelect.value);
+            if (player && player.setPlaybackRate) {
+                player.setPlaybackRate(currentSpeed);
+            }
+        }
         
+        function setSleepTimer() {
+            const timerSelect = document.getElementById('sleepTimer');
+            const minutes = parseInt(timerSelect.value);
+            
+            // Clear existing timer
+            if (sleepTimerId) {
+                clearTimeout(sleepTimerId);
+                sleepTimerId = null;
+            }
+            
+            if (minutes > 0) {
+                sleepTimerId = setTimeout(() => {
+                    if (player && player.pauseVideo) {
+                        player.pauseVideo();
+                        alert('🌙 Sleep timer activated - Playback paused');
+                    }
+                    timerSelect.value = '0';
+                }, minutes * 60 * 1000);
+                
+                // Show toast notification
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 50px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #333;
+                    color: #00ff66;
+                    padding: 1rem 2rem;
+                    border-radius: 10px;
+                    border: 1px solid #00ff66;
+                    z-index: 9999;
+                `;
+                toast.textContent = `🌙 Sleep timer set for ${minutes} minutes`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
+            }
+        }
         
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {

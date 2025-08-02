@@ -1,24 +1,97 @@
-# THE VAULT - YouTube Music Player Without Ads
+# THE VAULT V1 - Your Personal Music Library
 
-A clean, ad-free YouTube music player that lets you build and manage your own music collection with auto-play functionality.
+**The Vault** is a revolutionary music player that transforms YouTube into your personal, ad-free music library. Built as a native desktop application, it lets you curate, organize, and play your favorite tracks without interruptions, tracking, or advertisements.
+
+## 🚀 NEW: Easy Python Launcher
+
+**Easiest way to run The Vault:**
+**Located in the scripts directory** 
+```bash
+python3 scripts/launch_vault.py
+```
+
+This will automatically:
+- Check for Node.js
+- Install dependencies
+- Clear any port conflicts
+- Start the server
+- Open your browser
+
+**Note:** The Electron desktop app is currently a work in progress. Use the Python launcher above for full functionality.
+
+## 🚧 Known Issues & TODO
+
+### Features to Continue Working On:
+1. **Analytics System** - Implement comprehensive analytics tracking
+2. **Radio Mode Issues**:
+   - Fix: Songs don't change when playlist is launched
+   - Fix: Auto-advance between tracks in radio playlists
+   - Improve playlist queue management
+3. **Desktop App** - Complete Electron app functionality
+
+## 🎯 Purpose & Vision
+
+The Vault was created to solve a simple problem: YouTube has amazing music content, but the experience is cluttered with ads, recommendations, and distractions. The Vault strips all that away, giving you:
+
+- **Pure Music Experience**: No ads, no interruptions, just your music
+- **Personal Library**: Save and organize your favorite tracks permanently
+- **Privacy First**: No tracking, no analytics, your data stays on your device
+- **Native Performance**: Lightning-fast desktop app, not a sluggish web wrapper
+- **Offline Ready**: Once saved, your library persists even without internet
+
+## 🚀 Version 1.0 Features
+
+This is **Version 1** of The Vault, focusing on core music playback and library management:
+
+### ✅ What's Working in V1
+- **Add Videos**: Paste any YouTube URL to add to your library
+- **Categorize**: Organize tracks by genre (Hip Hop, Rock, Electronic, etc.)
+- **Private Mode**: Hide sensitive tracks with privacy toggle
+- **Save/Load**: Export and import your entire collection
+- **40+ Themes**: Customize your vault with unique visual themes
+- **Native App**: One-click launch desktop app
+- **Browser Mode**: Full functionality including auto-player and delete
+
+### 📝 V1 Known Limitations (Desktop App)
+- **Auto-Player**: Currently only works in browser mode (security restriction)
+- **Delete Button**: Currently only works in browser mode (security restriction)
+- **Workaround**: Use `npm run vault` for browser mode with full features
+
+### 🚧 Coming in V2
+- Full auto-player support in desktop app
+- Delete functionality in desktop app
+- Music visualizer integration
+- Playlist management
+- Offline video caching
+- Advanced search and filters
+- Keyboard shortcuts
 
 ## 🎨 Latest Updates (July 2025)
 
-### Major Theme System Overhaul
+### Complete Backend Integration & Feature Overhaul ⚡
+- **✅ Fixed Radio Mode**: Updated live stream IDs to working YouTube streams (Lofi Girl, Coffee Shop Radio, etc.)
+- **✅ YouTube API Integration**: Real channel fetching for Podcast mode with `/api/youtube/channel/:channelId` endpoint
+- **✅ Working Podcast Downloads**: ytdl-core backend integration for MP3 downloads via `/api/download` endpoint
+- **✅ Player Speed Controls**: 0.5x to 2x playback speed options in player interface
+- **✅ Sleep Timer**: 15min to 2hr auto-pause timer for podcast listening
+- **✅ Memory Auto-Compact**: Automatic storage cleanup when reaching 93% capacity (5MB threshold)
+
+### YouTube API Setup (Optional - Free Tier Available)
+- **Free Quota**: 10,000 API units per day (sufficient for most users)
+- **No Billing Required**: YouTube API v3 is completely free for standard usage
+- **Fallback Mode**: System works with mock data if no API key provided
+- **Setup Instructions**: See `.env` file for API key configuration
+
+### Previous Major Theme System Overhaul
 - **40 Unique Themes**: Each theme now has completely distinct visual personality
 - **Dynamic Typography**: Unique fonts, weights (300-900), letter spacing for each theme
 - **Custom Button Styles**: Theme-specific gradients, shadows, and hover effects
 - **No More Italics**: Replaced all cursive fonts with readable alternatives
 - **Full Theme Coverage**: All UI elements now respond to theme changes
-- **Theme Examples**:
-  - Synthwave: Neon gradients with glow effects
-  - Brutalist: No border radius, heavy shadows
-  - Terminal: Green text on black with blinking cursor
-  - Glass: Transparent with backdrop blur
-  - Memphis: Geometric shadows and bold colors
 
 ### Bug Fixes
 - Fixed "Play Current Category Only" button - now correctly filters videos by category
+- Fixed Radio mode "Video unavailable" errors with working stream IDs
 - Improved text readability on light themes with subtle shadows
 - Fixed CSS vendor prefix warnings for better browser compatibility
 - All hardcoded colors replaced with theme variables
@@ -26,20 +99,20 @@ A clean, ad-free YouTube music player that lets you build and manage your own mu
 ## Features
 
 ### Current Features
-- Ad-free YouTube playback using youtube-nocookie.com embeds
-- No tracking or analytics
-- Add videos by URL or video ID with YouTube thumbnail preview
-- Professional dark theme UI with grid/list view toggle
-- Video categorization system (Hip Hop, Rock, Electronic, Chill, custom categories)
-- Delete individual videos with hover × button
-- Delete categories with all associated videos
-- LocalStorage for permanent video storage
-- Save/load collections as JSON files
-- Public/Private mode toggle
-- Auto-play player with shuffle and repeat
-- Keyboard shortcuts in player
-- Session persistence across browser restarts
-- Real-time statistics tracking
+- **Ad-free YouTube playback** using youtube-nocookie.com embeds
+- **No tracking or analytics** - privacy first
+- **Add videos by URL or video ID** with YouTube thumbnail preview
+- **Professional UI** with 40+ themes and grid/list view toggle
+- **Radio Mode** with working live streams (Lofi Girl, Coffee Shop Radio, etc.)
+- **Podcast Mode** with real YouTube channel fetching and MP3 downloads
+- **Video categorization system** (Hip Hop, Rock, Electronic, Chill, Podcast, custom categories)
+- **Auto-play player** with shuffle, repeat, speed controls (0.5x-2x), and sleep timer
+- **Memory management** with auto-compact at 5MB threshold
+- **LocalStorage persistence** with automatic cleanup
+- **Save/load collections** as JSON files
+- **Public/Private mode** toggle
+- **Keyboard shortcuts** in player
+- **Real-time statistics** tracking
 
 ### Auto-Play Player
 - Opens in separate window for uninterrupted playback
@@ -57,28 +130,68 @@ A clean, ad-free YouTube music player that lets you build and manage your own mu
   - R: Toggle repeat
   - Q: Show/hide queue
 
-## Quick Start
+## 📦 Installation for The Vault V1
+
+### Download Pre-built App (Easiest)
+1. Download `The_Vault_V1.dmg` from [Releases](https://github.com/jguida941/vault-player/releases)
+2. Open the DMG file
+3. Drag The Vault to Applications
+4. Double-click to launch!
+
+### Build From Source
+Follow the Quick Start instructions below if you want to build from source.
+
+## Quick Start - Choose Your Setup
 
 ### Requirements
-- Node.js installed
+- Node.js 16+ installed ([Download here](https://nodejs.org/))
 - npm (comes with Node.js)
 
-### Installation
+### Option 1: One-Click Install (Easiest) 🚀
 ```bash
 # Clone the repository
 git clone https://github.com/jguida941/vault-player.git
 cd vault-player
 
-# Install dependencies
+# Run the installer
+./install.sh
+```
+The installer will:
+- Install all dependencies
+- Let you choose between browser or desktop mode
+- Option to build installable app for your platform
+
+### Option 2: Desktop App (Installable) 💻
+```bash
+# Clone and install
+git clone https://github.com/jguida941/vault-player.git
+cd vault-player
 npm install
 
-# Start the server
-npm start
+# Run as desktop app
+npm run electron
+
+# Or build installer for your platform
+npm run dist-mac      # macOS
+npm run dist-win      # Windows  
+npm run dist-linux    # Linux
 ```
 
-### Access the Vault
-- Open browser to http://localhost:8080 (automatically redirects to the vault)
-- Or directly visit http://localhost:8080/working.html
+### Option 3: Browser Mode (Original) 🌐
+```bash
+# Clone and install
+git clone https://github.com/jguida941/vault-player.git
+cd vault-player
+npm install
+
+# Start server and open browser
+npm run vault
+```
+
+### Access Methods
+- **Desktop App**: Runs as standalone application with native menus
+- **Browser Mode**: Visit http://localhost:8080 after starting server
+- **Installed App**: Double-click the app after building installer
 
 ## For Justin
 
@@ -228,14 +341,44 @@ vault_server/
   - Queue sidebar
   - Click-to-play from queue
 
+## Desktop App Features
+
+When running as a desktop app, you get:
+- **Native Application**: No browser tabs, runs as a real app
+- **Menu Bar Integration**: File menu with save/load shortcuts
+- **Keyboard Shortcuts**: 
+  - `Cmd/Ctrl+S`: Save collection
+  - `Cmd/Ctrl+O`: Load collection
+  - `Cmd/Ctrl+R`: Reload
+  - `F11`: Fullscreen
+- **App Icon**: Custom icon in dock/taskbar
+- **Offline Mode**: Works without internet (for saved videos)
+- **Auto-updates**: (Coming soon)
+
 ## NPM Scripts
 
+### Server & Browser Commands
 ```bash
 npm start         # Start the server
 npm stop          # Stop the server
 npm restart       # Restart the server
 npm run open      # Open vault in browser
 npm run vault     # Start server and auto-open browser
+```
+
+### Desktop App Commands
+```bash
+npm run electron      # Run as desktop app
+npm run electron-dev  # Run in development mode
+```
+
+### Build Commands
+```bash
+npm run dist          # Build for current platform
+npm run dist-mac      # Build macOS .dmg installer
+npm run dist-win      # Build Windows .exe installer
+npm run dist-linux    # Build Linux AppImage
+npm run dist-all      # Build for all platforms
 ```
 
 ## Technical Details
