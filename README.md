@@ -147,37 +147,22 @@ Follow the Quick Start instructions below if you want to build from source.
 - Node.js 16+ installed ([Download here](https://nodejs.org/))
 - npm (comes with Node.js)
 
-### Option 1: One-Click Install (Easiest) 🚀
+### Option 1: Python Launcher (Easiest) 🚀
 ```bash
 # Clone the repository
 git clone https://github.com/jguida941/vault-player.git
 cd vault-player
 
-# Run the installer
-./install.sh
+# Run the Python launcher
+python3 scripts/launch_vault.py
 ```
-The installer will:
+The launcher will:
+- Check for Node.js
 - Install all dependencies
-- Let you choose between browser or desktop mode
-- Option to build installable app for your platform
+- Clear port conflicts
+- Start server and open browser
 
-### Option 2: Desktop App (Installable) 💻
-```bash
-# Clone and install
-git clone https://github.com/jguida941/vault-player.git
-cd vault-player
-npm install
-
-# Run as desktop app
-npm run electron
-
-# Or build installer for your platform
-npm run dist-mac      # macOS
-npm run dist-win      # Windows  
-npm run dist-linux    # Linux
-```
-
-### Option 3: Browser Mode (Original) 🌐
+### Option 2: Browser Mode 🌐
 ```bash
 # Clone and install
 git clone https://github.com/jguida941/vault-player.git
@@ -190,7 +175,7 @@ npm run vault
 
 ### Access Methods
 - **Desktop App**: Runs as standalone application with native menus
-- **Browser Mode**: Visit http://localhost:8080 after starting server
+- **Browser Mode**: Visit http://localhost:8888 after starting server
 - **Installed App**: Double-click the app after building installer
 
 ## For Justin
@@ -200,7 +185,7 @@ npm run vault
 # Navigate to your vault folder
 cd /Users/jguida941/Desktop/vault_server
 
-# Start the server (it runs on port 8080)
+# Start the server (it runs on port 8888)
 npm start
 
 # Or use the all-in-one command that starts server AND opens browser
@@ -208,7 +193,7 @@ npm run vault
 ```
 
 ### Adding Your Music
-1. Go to http://localhost:8080 after starting the server
+1. Go to http://localhost:8888 after starting the server
 2. Copy any YouTube URL and paste it in the input box
 3. Click "Play" - it'll ask for a title and category
 4. Your music is automatically saved in the browser
@@ -273,8 +258,8 @@ npm start
 
 ```
 ┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   User Opens    │────▶│  server.js:8080  │────▶│  Redirects to   │
-│ localhost:8080  │     │  Express Server  │     │ /working.html   │
+│   User Opens    │────▶│  server.js:8888  │────▶│  Redirects to   │
+│ localhost:8888  │     │  Express Server  │     │ /working.html   │
 └─────────────────┘     └──────────────────┘     └─────────────────┘
                                                             │
                                                             ▼
@@ -290,33 +275,73 @@ npm start
 └─────────────────┘     └──────────────────┘     └─────────────────┘
 ```
 
-## Project Structure & File Descriptions
+## Project Structure
 
 ```
 vault_server/
-├── server.js              # Express server with redirect and embed endpoint
-├── package.json           # Project configuration
+├── server.js              # Express server (port 8888)
+├── package.json           # Dependencies & npm scripts
 ├── package-lock.json      # Dependency lock file
-├── README.md             # This file
+├── README.md              # This file
+├── PROJECT_STRUCTURE.md   # Detailed file tree
+├── .env                   # API keys (optional)
+├── .env.example           # Environment template
+├── .gitignore             # Git ignore file
+├── .pid                   # Server process ID (auto-generated)
 │
-├── public/               # Frontend files
-│   ├── index.html        # Legacy player (redirects to working.html)
-│   ├── working.html      # Main vault interface
-│   ├── player.html       # Auto-play player page
-│   └── test.html         # Test page
+├── public/                # Frontend files
+│   ├── working.html       # Main vault interface
+│   ├── player.html        # Auto-play player
+│   ├── test.html          # Test page
+│   └── themes/            # 40+ custom themes
+│       └── [40 JSON files]
 │
-└── docs/                 # Documentation
-    ├── VAULT_PHASES.md   # Original development phases
-    └── VAULT_ROADMAP.md  # Future feature roadmap
+├── scripts/               # Launch scripts
+│   ├── launch_vault.py    # ✅ Main launcher
+│   ├── COMMANDS.md        # Command documentation
+│   ├── install.sh         # Installer script
+│   ├── start_vault.sh     # Bash launcher
+│   ├── run-vault.sh       # Tauri launcher
+│   ├── test_all.sh        # Test runner
+│   ├── prepare-release.sh # Release prep
+│   └── launch_vault.command # macOS double-click
+│
+├── desktop/               # Desktop app files
+│   ├── electron.js        # Electron main process
+│   ├── tauri.conf.json    # Tauri config
+│   ├── Cargo.toml         # Rust dependencies
+│   ├── gen/               # Generated files
+│   └── target/            # Rust build output
+│
+├── icons/                 # App icons
+│   ├── icon.png           # Main icon
+│   ├── icon.ico           # Windows icon
+│   └── icon.icns          # macOS icon
+│
+├── assets/                # Additional assets
+│
+├── docs/                  # Documentation
+│   ├── VAULT_ROADMAP.md   # Future features
+│   ├── VAULT_PHASES.md    # Development phases
+│   └── PROJECT_STATUS.md  # Current status
+│
+├── release/               # Release files
+│   └── RELEASE_NOTES.md   # Version history
+│
+└── node_modules/          # Dependencies (gitignored)
 ```
+
+For complete details, see [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 
 ### File Descriptions
 
 #### `server.js`
-- Express.js server running on port 8080
+- Express.js server running on port 8888
 - Serves static files from `/public` directory
 - Auto-redirects root `/` to `/working.html`
 - Dynamic embed endpoint `/embed/:id` for YouTube iframe generation
+- YouTube API endpoint `/api/youtube/channel/:channelId` for channel fetching
+- Download endpoint `/api/download` for MP3 podcast downloads
 - PID file management for reliable stop/restart commands
 
 #### `working.html`
@@ -357,28 +382,15 @@ When running as a desktop app, you get:
 
 ## NPM Scripts
 
-### Server & Browser Commands
+### Working Commands
 ```bash
-npm start         # Start the server
+npm start         # Start server on port 8888
 npm stop          # Stop the server
 npm restart       # Restart the server
-npm run open      # Open vault in browser
 npm run vault     # Start server and auto-open browser
-```
 
-### Desktop App Commands
-```bash
-npm run electron      # Run as desktop app
-npm run electron-dev  # Run in development mode
-```
-
-### Build Commands
-```bash
-npm run dist          # Build for current platform
-npm run dist-mac      # Build macOS .dmg installer
-npm run dist-win      # Build Windows .exe installer
-npm run dist-linux    # Build Linux AppImage
-npm run dist-all      # Build for all platforms
+# Desktop app (requires Electron installed)
+npm run electron  # Run as desktop app
 ```
 
 ## Technical Details

@@ -1,93 +1,91 @@
-# Project Structure - The Vault V2
+# The Vault - Project Structure
 
-## Clean Directory Layout
+## Complete File Tree
 
 ```
 vault_server/
+├── server.js                 # Express server (port 8888)
+├── package.json              # Node dependencies & scripts  
+├── package-lock.json         # Dependency lock file
+├── .env                      # Environment variables (API keys)
+├── .env.example              # Example environment template
+├── README.md                 # Main documentation
+├── PROJECT_STRUCTURE.md      # This file (you are here)
 │
-├──  Core Files
-│   ├── server.js              # Express server (main functionality)
-│   ├── package.json          # Dependencies and npm scripts
-│   ├── package-lock.json    # Lock file
-│   ├── README.md           # Main documentation
-│   ├── PROJECT_STRUCTURE.md # This file
-│   ├── .gitignore         # Git ignore rules
-│   └── .env.example      # Environment template
+├── public/                   # Frontend files (served by Express)
+│   ├── working.html          # Main vault interface
+│   ├── player.html           # Auto-play player window
+│   ├── test.html            # Test page
+│   └── themes/              # 40+ theme JSON files
+│       ├── themes.json      # Theme registry
+│       └── [40 theme files] # Individual theme configs
 │
-├──  public/             # Web Interface
-│   ├── working.html      # Main application
-│   ├── player.html      # Auto-player window
-│   ├── test.html       # Test page
-│   └── themes/        # 40+ theme files
-│       └── *.json
+├── scripts/                  # Launch & utility scripts
+│   ├── launch_vault.py       # ✅ MAIN LAUNCHER - Python script
+│   ├── COMMANDS.md          # Command documentation
+│   ├── install.sh           # Dependency installer
+│   ├── start_vault.sh       # Bash server starter
+│   ├── run-vault.sh         # Tauri launcher (needs Rust)
+│   ├── test_all.sh          # Test runner
+│   ├── prepare-release.sh   # Release preparation
+│   └── launch_vault.command # macOS double-click launcher
 │
-├──  scripts/           # All Launch & Utility Scripts
-│   ├── launch_vault.py         # Python launcher (recommended)
-│   ├── launch_vault.command   # macOS double-click
-│   ├── start_vault.sh        # Simple bash launcher
-│   ├── run-vault.sh         # Alternative runner
-│   ├── install.sh          # Installation helper
-│   └── prepare-release.sh # Release preparation
+├── desktop/                  # Desktop app files (Electron/Tauri)
+│   ├── electron.js          # Electron main process
+│   ├── tauri.conf.json      # Tauri configuration
+│   ├── gen/                 # Generated Tauri files
+│   └── target/              # Rust build artifacts
 │
-├──  desktop/          # Desktop App Files (WIP)
-│   ├── electron.js     # Electron wrapper
-│   ├── tauri.conf.json # Tauri config
-│   ├── Cargo.toml     # Rust dependencies
-│   ├── Cargo.lock    # Rust lock file
-│   ├── build.rs      # Build script
-│   ├── src/         # Rust source
-│   │   ├── main.rs
-│   │   └── lib.rs
-│   ├── gen/        # Generated files
-│   └── target/    # Build output
+├── docs/                     # Documentation
+│   ├── VAULT_PHASES.md      # Development phases
+│   ├── VAULT_ROADMAP.md     # Future features
+│   └── PROJECT_STATUS.md    # Current status
 │
-├── assets/         # Images & Icons
-│   ├── icon.png
-│   └── icons/
-│       ├── icon.png
-│       ├── icon.ico
-│       └── icon.icns
+├── release/                  # Release files
+│   └── RELEASE_NOTES.md     # Version history
 │
-├── docs/          # Documentation
-│   ├── PROJECT_STATUS.md
-│   ├── VAULT_PHASES.md
-│   └── VAULT_ROADMAP.md
-│
-└── release/      # Releases
-    ├── RELEASE_NOTES.md
-    └── The_Vault_V1.dmg
+└── node_modules/            # Installed packages (gitignored)
 ```
 
-## Quick Start
-
-From the root directory:
+## Quick Start Commands
 
 ```bash
-# Easiest method - Python launcher
+# RECOMMENDED - Python launcher (handles everything)
 python3 scripts/launch_vault.py
 
-# Alternative - Direct server start
-npm start
-# Then open http://localhost:8888
+# Alternative - Direct npm commands
+npm start         # Start server on port 8888
+npm run vault     # Start server + open browser
+npm stop          # Stop the server
 
-# Desktop app (limited functionality, work in progress, use python launcher)
-npm run electron
+# Desktop app (if Electron installed)
+npm run electron  # Run as desktop app
 ```
 
-## Key Points
+## Server Details
 
-1. **Root directory** - Only essential files (server.js, package.json, README)
-2. **scripts/** - All launch and utility scripts organized
-3. **desktop/** - All desktop app related files (Electron, Tauri)
-4. **public/** - Web interface with themes subfolder
-5. **assets/** - All images and icons
-6. **docs/** - Additional documentation
+- **Port**: 8888 (NOT 8080!)
+- **URL**: http://localhost:8888
+- **Auto-redirects**: / → /working.html
 
-## Benefits of This Structure
+## API Endpoints
 
-- ✅ Clean root directory
-- ✅ Logical grouping of related files
-- ✅ Easy to navigate
-- ✅ Clear separation of concerns
-- ✅ Ready for version control
-- ✅ Professional organization
+- `/api/youtube/channel/:id` - Fetch YouTube channel videos
+- `/api/download` - Download MP3 from YouTube
+- `/embed/:id` - YouTube video embed player
+
+## Key Files Explained
+
+### Core
+- **server.js** - Express server with YouTube API integration
+- **package.json** - Dependencies and npm scripts
+- **.env** - YouTube API key (optional)
+
+### Frontend
+- **public/working.html** - Main vault interface
+- **public/player.html** - Auto-play window
+- **public/themes/** - 40 custom themes
+
+### Scripts
+- **scripts/launch_vault.py** - Main launcher (recommended)
+- **scripts/COMMANDS.md** - All available commands

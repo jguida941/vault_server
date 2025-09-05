@@ -1,55 +1,61 @@
 # The Vault - Command Reference
 
-## 🚀 Quick Start Commands
+## 🚀 Quick Start - ONLY USE THESE
 
-All commands should be run from the project root directory: `/Users/jguida941/Desktop/vault_server/`
-
-### Recommended Launch Method
+### Best Method (Recommended)
 ```bash
+cd /Users/jguida941/Desktop/vault_server
 python3 scripts/launch_vault.py
 ```
+This handles everything automatically!
 
-### Alternative Launch Methods
+### Alternative Methods
 ```bash
-# Shell script launcher
-./scripts/start_vault.sh
+# Direct npm commands
+npm start          # Start server on port 8888
+npm run vault      # Start + open browser
+npm stop           # Stop server
 
-# macOS double-click
-# Just double-click: scripts/launch_vault.command
-
-# Manual start
-npm start
-# Then open http://localhost:8888 in browser
+# Access in browser
+http://localhost:8888
 ```
 
-## 📋 All Available Commands
+## ✅ VERIFIED WORKING Commands
 
-### Server Commands
+### Server Control
 ```bash
 npm start          # Start server on port 8888
-npm stop           # Stop the server
-npm restart        # Restart server
-npm run vault      # Start server + auto-open browser
+npm stop           # Stop the server  
+npm restart        # Stop then start
+npm run vault      # Start + auto-open browser
+npm run open       # Just open browser (server must be running)
 ```
 
-### Desktop App Commands (Work in Progress)
+### Desktop App (Only if Electron installed)
 ```bash
-npm run electron   # Run Electron app (limited features)
-npm run tauri      # Run Tauri app (experimental)
+npm run electron   # Run as desktop app
+npm run electron-dev # Dev mode with console
 ```
 
-### Build Commands
+### Build Commands (Requires Electron Builder)
 ```bash
-npm run dist       # Build for current platform
 npm run dist-mac   # Build macOS .dmg
 npm run dist-win   # Build Windows .exe
 npm run dist-linux # Build Linux AppImage
 ```
 
-### Utility Scripts
+## ⚠️ Commands That DON'T Work Without Additional Setup
+
+### Tauri Commands (Requires Rust/Cargo)
 ```bash
-./scripts/install.sh         # Interactive installer
-./scripts/prepare-release.sh # Prepare for release
+npm run tauri      # Needs Rust installed
+npm run tauri-build # Needs cargo command
+```
+
+### Shell Scripts (May need permissions)
+```bash
+./scripts/install.sh  # Run: chmod +x scripts/install.sh first
+./scripts/start_vault.sh # Alternative launcher
 ```
 
 ## 🛠️ Troubleshooting
