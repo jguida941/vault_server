@@ -1,6 +1,6 @@
 # THE VAULT V1 - Your Personal Music Library
 
-**The Vault** is a revolutionary music player that transforms YouTube into your personal, ad-free music library. Built as a native desktop application, it lets you curate, organize, and play your favorite tracks without interruptions, tracking, or advertisements.
+**The Vault** The Vault is a private, server-based music player that turns YouTube into your personal, ad-free library. Current status: it runs as a Node.js server with an HTML frontend (browser mode). The Electron desktop app is not yet implemented, use the server + web UI for now to curate, organize, and play your tracks without ads, tracking, or interruptions.
 
 **⚠️ Work in Progress. This project is still under heavy development**
 <br>
