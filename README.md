@@ -13,6 +13,39 @@ A lot needs to be done in terms of organization, new features, and unit testing.
 
 **I’m putting this out in the open for transparency, learning, and collaboration. Feel free to contribute! I’m currently balancing school and 100+ projects, so I don’t have time to maintain this full-time.**
 
+## The Vault
+
+<img width="1583" height="991" alt="Screenshot 2025-09-07 at 8 09 54 PM" src="https://github.com/user-attachments/assets/17648bbb-8239-4c89-b4c0-f64b177ca785" />
+
+<img width="1715" height="1015" alt="Screenshot 2025-09-07 at 8 10 33 PM" src="https://github.com/user-attachments/assets/8cbd1245-ea43-4392-9663-82ebc82eae42" />
+
+<img width="1728" height="1007" alt="Screenshot 2025-09-07 at 8 10 50 PM" src="https://github.com/user-attachments/assets/b0254c3b-b5eb-4c12-acbc-42e55c9763d4" />
+
+<img width="1728" height="1022" alt="Screenshot 2025-09-07 at 8 11 08 PM" src="https://github.com/user-attachments/assets/10f03303-bbd6-4891-af81-2ce1dbf03acf" />
+
+<img width="1728" height="1007" alt="Screenshot 2025-09-07 at 8 11 22 PM" src="https://github.com/user-attachments/assets/d60423f7-b806-4815-8d97-91b210c99c43" />
+
+<img width="1728" height="306" alt="Screenshot 2025-09-07 at 8 11 43 PM" src="https://github.com/user-attachments/assets/ad0453ac-48e3-4fc3-bb65-2c54219e9b22" />
+
+<img width="1224" height="806" alt="Screenshot 2025-09-07 at 8 12 29 PM" src="https://github.com/user-attachments/assets/3b4f76b9-90c1-4a22-9a9f-971c117538b9" />
+<img width="1495" height="1003" alt="Screenshot 2025-09-07 at 8 12 47 PM" src="https://github.com/user-attachments/assets/bbbe8512-5315-4d68-9638-6ad052ce7c64" />
+<img width="1653" height="974" alt="Screenshot 2025-09-07 at 8 13 03 PM" src="https://github.com/user-attachments/assets/392f637d-6d5c-4776-b167-8e60ca36a99c" />
+<img width="1643" height="958" alt="Screenshot 2025-09-07 at 8 13 19 PM" src="https://github.com/user-attachments/assets/8bf8ffd1-a108-46e7-81ed-3313a2e4da42" />
+## Radio Mode needs work feel free to contribute
+<img width="1423" height="993" alt="Screenshot 2025-09-07 at 8 14 54 PM" src="https://github.com/user-attachments/assets/1d61176c-63ea-43ba-a0a7-e2976e81ba46" />
+
+## How it works, get the url of the youtube video!
+<img width="1209" height="879" alt="Screenshot 2025-09-07 at 8 17 23 PM" src="https://github.com/user-attachments/assets/1828903e-d929-4821-b4a5-f387b1386f1f" />
+
+## Paste in the link!
+
+<img width="1687" height="1088" alt="Screenshot 2025-09-07 at 8 18 11 PM" src="https://github.com/user-attachments/assets/80f1d6fb-4512-4525-add7-b96e63d541f2" />
+
+## Add Cat<img width="852" height="684" alt="Screenshot 2025-09-07 at 8 20 19 PM" src="https://github.com/user-attachments/assets/ee0ee14b-f949-455d-8c6e-e2759b49b505" />
+egory!
+
+
+
 ## 🚀 NEW: Easy Python Launcher
 
 **Easiest way to run The Vault:**
