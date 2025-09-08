@@ -2,6 +2,17 @@
 
 **The Vault** is a revolutionary music player that transforms YouTube into your personal, ad-free music library. Built as a native desktop application, it lets you curate, organize, and play your favorite tracks without interruptions, tracking, or advertisements.
 
+**⚠️ Work in Progress. This project is still under heavy development**
+<br>
+A lot needs to be done in terms of organization, new features, and unit testing.
+
+### Right now it works for its core purpose:
+	•	Load, delete, and play YouTube videos
+	•	Store metadata locally
+	•	Play them ad-free in your own music/podcast–style server
+
+**I’m putting this out in the open for transparency, learning, and collaboration. Feel free to contribute! I’m currently balancing school and 100+ projects, so I don’t have time to maintain this full-time.**
+
 ## 🚀 NEW: Easy Python Launcher
 
 **Easiest way to run The Vault:**
@@ -27,7 +38,7 @@ This will automatically:
    - Fix: Songs don't change when playlist is launched
    - Fix: Auto-advance between tracks in radio playlists
    - Improve playlist queue management
-3. **Desktop App** - Complete Electron app functionality
+3. **Desktop App** - Complete Electron app functionality; Not Funtional yet, use server.
 
 ## 🎯 Purpose & Vision
 
@@ -76,21 +87,15 @@ This is **Version 1** of The Vault, focusing on core music playback and library 
 - **✅ Sleep Timer**: 15min to 2hr auto-pause timer for podcast listening
 - **✅ Memory Auto-Compact**: Automatic storage cleanup when reaching 93% capacity (5MB threshold)
 
-### YouTube API Setup (Optional - Free Tier Available)
-- **Free Quota**: 10,000 API units per day (sufficient for most users)
-- **No Billing Required**: YouTube API v3 is completely free for standard usage
-- **Fallback Mode**: System works with mock data if no API key provided
-- **Setup Instructions**: See `.env` file for API key configuration
 
-### Previous Major Theme System Overhaul
+### Previous Major Theme System Overhaul Some themes need to be fixed feel free to help!
 - **40 Unique Themes**: Each theme now has completely distinct visual personality
 - **Dynamic Typography**: Unique fonts, weights (300-900), letter spacing for each theme
 - **Custom Button Styles**: Theme-specific gradients, shadows, and hover effects
-- **No More Italics**: Replaced all cursive fonts with readable alternatives
 - **Full Theme Coverage**: All UI elements now respond to theme changes
 
 ### Bug Fixes
-- Fixed "Play Current Category Only" button - now correctly filters videos by category
+- Fixed "Play Current Category Only" button now correctly filters videos by category
 - Fixed Radio mode "Video unavailable" errors with working stream IDs
 - Improved text readability on light themes with subtle shadows
 - Fixed CSS vendor prefix warnings for better browser compatibility
@@ -111,7 +116,7 @@ This is **Version 1** of The Vault, focusing on core music playback and library 
 - **LocalStorage persistence** with automatic cleanup
 - **Save/load collections** as JSON files
 - **Public/Private mode** toggle
-- **Keyboard shortcuts** in player
+- **Keyboard shortcuts** in player- TODO test this feature. Sep 7th 2025
 - **Real-time statistics** tracking
 
 ### Auto-Play Player
@@ -123,23 +128,13 @@ This is **Version 1** of The Vault, focusing on core music playback and library 
 - Repeat mode for continuous looping
 - Queue sidebar showing all videos
 - Click any video in queue to play
-- Keyboard shortcuts:
+- Keyboard shortcuts: TODO: Implement/Unit Test
   - Space: Play/Pause
   - Left/Right arrows: Previous/Next
   - S: Toggle shuffle
   - R: Toggle repeat
   - Q: Show/hide queue
 
-## 📦 Installation for The Vault V1
-
-### Download Pre-built App (Easiest)
-1. Download `The_Vault_V1.dmg` from [Releases](https://github.com/jguida941/vault-player/releases)
-2. Open the DMG file
-3. Drag The Vault to Applications
-4. Double-click to launch!
-
-### Build From Source
-Follow the Quick Start instructions below if you want to build from source.
 
 ## Quick Start - Choose Your Setup
 
@@ -147,50 +142,24 @@ Follow the Quick Start instructions below if you want to build from source.
 - Node.js 16+ installed ([Download here](https://nodejs.org/))
 - npm (comes with Node.js)
 
-### Option 1: Python Launcher (Easiest) 🚀
-```bash
-# Clone the repository
-git clone https://github.com/jguida941/vault-player.git
-cd vault-player
 
-# Run the Python launcher
-python3 scripts/launch_vault.py
-```
-The launcher will:
-- Check for Node.js
-- Install all dependencies
-- Clear port conflicts
-- Start server and open browser
+### 🐍 Python Launcher (Simple)
 
-### Option 2: Browser Mode 🌐
-```bash
-# Clone and install
-git clone https://github.com/jguida941/vault-player.git
-cd vault-player
-npm install
+### python3 scripts/launch_vault.py
 
-# Start server and open browser
-npm run vault
-```
+
+### 🍏 macOS Auto Launch Command
+
+	•	Run launch_vault.command inside the scripts directory
+	•	This will start the server in Terminal and open The Vault automatically
+	•	To stop the server, press Ctrl + C in the Terminal window
+
 
 ### Access Methods
 - **Desktop App**: Runs as standalone application with native menus
 - **Browser Mode**: Visit http://localhost:8888 after starting server
 - **Installed App**: Double-click the app after building installer
 
-## For Justin
-
-### Running the Server (Quick Reminder)
-```bash
-# Navigate to your vault folder
-cd /Users/jguida941/Desktop/vault_server
-
-# Start the server (it runs on port 8888)
-npm start
-
-# Or use the all-in-one command that starts server AND opens browser
-npm run vault
-```
 
 ### Adding Your Music
 1. Go to http://localhost:8888 after starting the server
