@@ -87,7 +87,7 @@ After starting, open http://localhost:8888 in your browser.
 - Go to Settings > Import Collection
 - Or drag and drop a JSON file anywhere
 
-### Themes
+## Themes
 ![Theme Selection](img/themes.png)
 
 The Vault includes 10 professional themes loaded from JSON files:
