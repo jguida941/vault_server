@@ -43,3 +43,19 @@ target/
 
 # Generated files
 gen/
+
+# Project planning files (private)
+AUDIT.md
+*vault*phases*
+*roadmap*
+vault_phases*
+vault_roadmap*
+
+# Screenshots in docs (moved to /img/)
+docs/*.png
+docs/*.jpg
+# Icon screenshots (not app icons)
+icons/Screenshot*
+
+# Archive (legacy/unused files)
+archive/

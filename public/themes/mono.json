@@ -1,0 +1,41 @@
+{
+  "id": "mono",
+  "name": "Minimal Mono",
+  "icon": "mono",
+  "description": "Clean monochrome minimalism",
+  "isDark": true,
+  "colors": {
+    "surface": "#121212",
+    "surfaceDim": "#121212",
+    "surfaceBright": "#2C2C2C",
+    "surfaceContainerLowest": "#000000",
+    "surfaceContainerLow": "#121212",
+    "surfaceContainer": "#1E1E1E",
+    "surfaceContainerHigh": "#1E1E1E",
+    "surfaceContainerHighest": "#2C2C2C",
+    "onSurface": "#E0E0E0",
+    "onSurfaceVariant": "#9E9E9E",
+    "primary": "#BDBDBD",
+    "onPrimary": "#2E2E2E",
+    "primaryContainer": "#424242",
+    "onPrimaryContainer": "#E0E0E0",
+    "secondary": "#BDBDBD",
+    "onSecondary": "#2E2E2E",
+    "secondaryContainer": "#424242",
+    "onSecondaryContainer": "#E0E0E0",
+    "tertiary": "#BDBDBD",
+    "onTertiary": "#2E2E2E",
+    "error": "#FFB4AB",
+    "onError": "#690005",
+    "outline": "#757575",
+    "outlineVariant": "#2C2C2C",
+    "inverseSurface": "#E0E0E0",
+    "inverseOnSurface": "#1E1E1E",
+    "inversePrimary": "#5C5C5C"
+  },
+  "fonts": {
+    "brand": "'SF Mono', 'Roboto Mono', monospace",
+    "plain": "'SF Mono', 'Roboto Mono', monospace",
+    "code": "'SF Mono', 'Roboto Mono', monospace"
+  }
+}

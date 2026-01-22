@@ -1,0 +1,41 @@
+{
+  "id": "rose",
+  "name": "Rose Gold",
+  "icon": "rose",
+  "description": "Elegant rose gold tones",
+  "isDark": false,
+  "colors": {
+    "surface": "#FFFBFF",
+    "surfaceDim": "#F5DDE0",
+    "surfaceBright": "#FFFBFF",
+    "surfaceContainerLowest": "#FFFFFF",
+    "surfaceContainerLow": "#FFEDEE",
+    "surfaceContainer": "#F5DDE0",
+    "surfaceContainerHigh": "#F5DDE0",
+    "surfaceContainerHighest": "#D8C2C3",
+    "onSurface": "#201A1B",
+    "onSurfaceVariant": "#4D4546",
+    "primary": "#9F3C62",
+    "onPrimary": "#FFFFFF",
+    "primaryContainer": "#FFD9E2",
+    "onPrimaryContainer": "#3E001D",
+    "secondary": "#76565B",
+    "onSecondary": "#FFFFFF",
+    "secondaryContainer": "#FFDADD",
+    "onSecondaryContainer": "#2B1519",
+    "tertiary": "#76565B",
+    "onTertiary": "#FFFFFF",
+    "error": "#BA1A1A",
+    "onError": "#FFFFFF",
+    "outline": "#857A7B",
+    "outlineVariant": "#D8C2C3",
+    "inverseSurface": "#362F30",
+    "inverseOnSurface": "#FFEDEE",
+    "inversePrimary": "#FFB1C8"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

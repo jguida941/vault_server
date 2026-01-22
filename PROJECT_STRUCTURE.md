@@ -1,91 +1,95 @@
 # The Vault - Project Structure
 
-## Complete File Tree
+## File Tree
 
 ```
 vault_server/
 ├── server.js                 # Express server (port 8888)
-├── package.json              # Node dependencies & scripts  
-├── package-lock.json         # Dependency lock file
-├── .env                      # Environment variables (API keys)
-├── .env.example              # Example environment template
+├── package.json              # Node dependencies & scripts
 ├── README.md                 # Main documentation
-├── PROJECT_STRUCTURE.md      # This file (you are here)
+├── LICENSE.md                # MIT License
 │
 ├── public/                   # Frontend files (served by Express)
-│   ├── working.html          # Main vault interface
-│   ├── player.html           # Auto-play player window
-│   ├── test.html            # Test page
-│   └── themes/              # 40+ theme JSON files
-│       ├── themes.json      # Theme registry
-│       └── [40 theme files] # Individual theme configs
+│   ├── v2.html               # Main vault interface
+│   ├── themes/               # 10 theme JSON files
+│   │   ├── material-dark.json
+│   │   ├── material-light.json
+│   │   ├── ocean.json
+│   │   ├── forest.json
+│   │   ├── sunset.json
+│   │   ├── cyber.json
+│   │   ├── rose.json
+│   │   ├── midnight.json
+│   │   ├── mono.json
+│   │   └── amber.json
+│   │
+│   └── src/                  # Modular JavaScript
+│       ├── app.js            # Application entry point
+│       ├── core/             # Core modules
+│       │   ├── storage.js    # LocalStorage wrapper
+│       │   └── state.js      # State management
+│       ├── theme/            # Theme system
+│       │   ├── themes.js     # Theme loader
+│       │   ├── themeManager.js
+│       │   └── tokens.js     # Design tokens
+│       ├── ui/               # UI components
+│       │   ├── components.js
+│       │   ├── icons.js
+│       │   └── notifications.js
+│       ├── player/           # Player modules
+│       │   ├── playlist.js
+│       │   └── youtubePlayer.js
+│       ├── utils/            # Utilities
+│       │   └── validators.js
+│       └── styles/           # Stylesheets
+│           └── main.css
 │
-├── scripts/                  # Launch & utility scripts
-│   ├── launch_vault.py       # ✅ MAIN LAUNCHER - Python script
-│   ├── COMMANDS.md          # Command documentation
-│   ├── install.sh           # Dependency installer
-│   ├── start_vault.sh       # Bash server starter
-│   ├── run-vault.sh         # Tauri launcher (needs Rust)
-│   ├── test_all.sh          # Test runner
-│   ├── prepare-release.sh   # Release preparation
-│   └── launch_vault.command # macOS double-click launcher
+├── img/                      # README screenshots
 │
-├── desktop/                  # Desktop app files (Electron/Tauri)
-│   ├── electron.js          # Electron main process
-│   ├── tauri.conf.json      # Tauri configuration
-│   ├── gen/                 # Generated Tauri files
-│   └── target/              # Rust build artifacts
+├── scripts/                  # Launch scripts
+│   ├── launch_vault.py       # Python launcher (recommended)
+│   ├── launch_vault.command  # macOS double-click launcher
+│   ├── launch_vault.bat      # Windows launcher
+│   └── COMMANDS.md           # Command documentation
 │
-├── docs/                     # Documentation
-│   ├── VAULT_PHASES.md      # Development phases
-│   ├── VAULT_ROADMAP.md     # Future features
-│   └── PROJECT_STATUS.md    # Current status
-│
-├── release/                  # Release files
-│   └── RELEASE_NOTES.md     # Version history
-│
-└── node_modules/            # Installed packages (gitignored)
+├── icons/                    # App icons
+├── assets/                   # Additional assets
+└── desktop/                  # Desktop app files (Electron/Tauri)
 ```
 
-## Quick Start Commands
+## Quick Start
 
 ```bash
-# RECOMMENDED - Python launcher (handles everything)
+# RECOMMENDED - Python launcher
 python3 scripts/launch_vault.py
 
-# Alternative - Direct npm commands
+# Alternative - npm commands
 npm start         # Start server on port 8888
 npm run vault     # Start server + open browser
 npm stop          # Stop the server
-
-# Desktop app (if Electron installed)
-npm run electron  # Run as desktop app
 ```
 
 ## Server Details
 
-- **Port**: 8888 (NOT 8080!)
+- **Port**: 8888
 - **URL**: http://localhost:8888
-- **Auto-redirects**: / → /working.html
+- **Main page**: /v2.html (auto-redirected from /)
 
-## API Endpoints
-
-- `/api/youtube/channel/:id` - Fetch YouTube channel videos
-- `/api/download` - Download MP3 from YouTube
-- `/embed/:id` - YouTube video embed player
-
-## Key Files Explained
+## Key Files
 
 ### Core
-- **server.js** - Express server with YouTube API integration
+- **server.js** - Express server with embed endpoint
 - **package.json** - Dependencies and npm scripts
-- **.env** - YouTube API key (optional)
 
 ### Frontend
-- **public/working.html** - Main vault interface
-- **public/player.html** - Auto-play window
-- **public/themes/** - 40 custom themes
+- **public/v2.html** - Main vault interface (modular)
+- **public/themes/** - 10 customizable theme JSON files
+- **public/src/** - Modular ES6 JavaScript
 
 ### Scripts
 - **scripts/launch_vault.py** - Main launcher (recommended)
 - **scripts/COMMANDS.md** - All available commands
+
+## Custom Themes
+
+Add custom themes by creating JSON files in `/public/themes/`. See existing themes for the format.

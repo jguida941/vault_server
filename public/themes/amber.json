@@ -1,0 +1,41 @@
+{
+  "id": "amber",
+  "name": "Warm Amber",
+  "icon": "amber",
+  "description": "Cozy amber warmth",
+  "isDark": true,
+  "colors": {
+    "surface": "#1D1B16",
+    "surfaceDim": "#1D1B16",
+    "surfaceBright": "#494640",
+    "surfaceContainerLowest": "#000000",
+    "surfaceContainerLow": "#1D1B16",
+    "surfaceContainer": "#32302A",
+    "surfaceContainerHigh": "#32302A",
+    "surfaceContainerHighest": "#494640",
+    "onSurface": "#E5E1DA",
+    "onSurfaceVariant": "#ADAAA3",
+    "primary": "#FFBF00",
+    "onPrimary": "#402D00",
+    "primaryContainer": "#5C4300",
+    "onPrimaryContainer": "#FFE082",
+    "secondary": "#D0C5B5",
+    "onSecondary": "#353025",
+    "secondaryContainer": "#4C463A",
+    "onSecondaryContainer": "#ECE1D1",
+    "tertiary": "#D0C5B5",
+    "onTertiary": "#353025",
+    "error": "#FFB4AB",
+    "onError": "#690005",
+    "outline": "#928F88",
+    "outlineVariant": "#494640",
+    "inverseSurface": "#E5E1DA",
+    "inverseOnSurface": "#32302A",
+    "inversePrimary": "#795900"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

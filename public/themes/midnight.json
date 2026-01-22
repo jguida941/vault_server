@@ -1,0 +1,41 @@
+{
+  "id": "midnight",
+  "name": "Midnight Purple",
+  "icon": "midnight",
+  "description": "Deep purple night vibes",
+  "isDark": true,
+  "colors": {
+    "surface": "#1C1B1F",
+    "surfaceDim": "#1C1B1F",
+    "surfaceBright": "#484649",
+    "surfaceContainerLowest": "#000000",
+    "surfaceContainerLow": "#1C1B1F",
+    "surfaceContainer": "#313033",
+    "surfaceContainerHigh": "#313033",
+    "surfaceContainerHighest": "#484649",
+    "onSurface": "#E6E1E5",
+    "onSurfaceVariant": "#AEAAAE",
+    "primary": "#BB86FC",
+    "onPrimary": "#32006B",
+    "primaryContainer": "#480091",
+    "onPrimaryContainer": "#E2BFFF",
+    "secondary": "#CABDD9",
+    "onSecondary": "#302A3C",
+    "secondaryContainer": "#473F54",
+    "onSecondaryContainer": "#E7D9F6",
+    "tertiary": "#03DAC6",
+    "onTertiary": "#003737",
+    "error": "#FFB4AB",
+    "onError": "#690005",
+    "outline": "#938F99",
+    "outlineVariant": "#484649",
+    "inverseSurface": "#E6E1E5",
+    "inverseOnSurface": "#313033",
+    "inversePrimary": "#6200EE"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

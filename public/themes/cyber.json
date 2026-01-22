@@ -1,0 +1,41 @@
+{
+  "id": "cyber",
+  "name": "Neon Cyber",
+  "icon": "cyber",
+  "description": "Cyberpunk neon aesthetic",
+  "isDark": true,
+  "colors": {
+    "surface": "#0A0E0E",
+    "surfaceDim": "#0A0E0E",
+    "surfaceBright": "#2E3232",
+    "surfaceContainerLowest": "#000000",
+    "surfaceContainerLow": "#0A0E0E",
+    "surfaceContainer": "#1A1E1E",
+    "surfaceContainerHigh": "#1A1E1E",
+    "surfaceContainerHighest": "#2E3232",
+    "onSurface": "#DCE3E3",
+    "onSurfaceVariant": "#A4ABAB",
+    "primary": "#4EEAE4",
+    "onPrimary": "#003735",
+    "primaryContainer": "#00504D",
+    "onPrimaryContainer": "#70F7F1",
+    "secondary": "#C4B5FD",
+    "onSecondary": "#350080",
+    "secondaryContainer": "#4B00B5",
+    "onSecondaryContainer": "#EDE9FE",
+    "tertiary": "#FFB1C8",
+    "onTertiary": "#66002A",
+    "error": "#FFB4AB",
+    "onError": "#690005",
+    "outline": "#8A9090",
+    "outlineVariant": "#2E3232",
+    "inverseSurface": "#DCE3E3",
+    "inverseOnSurface": "#1A1E1E",
+    "inversePrimary": "#006A66"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

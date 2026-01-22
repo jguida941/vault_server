@@ -1,0 +1,41 @@
+{
+  "id": "material-dark",
+  "name": "Material Dark",
+  "icon": "darkMode",
+  "description": "Clean Material Design dark theme",
+  "isDark": true,
+  "colors": {
+    "surface": "#1C1B1F",
+    "surfaceDim": "#1C1B1F",
+    "surfaceBright": "#484649",
+    "surfaceContainerLowest": "#000000",
+    "surfaceContainerLow": "#1C1B1F",
+    "surfaceContainer": "#313033",
+    "surfaceContainerHigh": "#313033",
+    "surfaceContainerHighest": "#484649",
+    "onSurface": "#E6E1E5",
+    "onSurfaceVariant": "#AEAAAE",
+    "primary": "#D0BCFF",
+    "onPrimary": "#381E72",
+    "primaryContainer": "#4F378B",
+    "onPrimaryContainer": "#EADDFF",
+    "secondary": "#CCC2DC",
+    "onSecondary": "#332D41",
+    "secondaryContainer": "#4A4458",
+    "onSecondaryContainer": "#E8DEF8",
+    "tertiary": "#CCC2DC",
+    "onTertiary": "#332D41",
+    "error": "#FFB4AB",
+    "onError": "#690005",
+    "outline": "#938F99",
+    "outlineVariant": "#484649",
+    "inverseSurface": "#E6E1E5",
+    "inverseOnSurface": "#313033",
+    "inversePrimary": "#6750A4"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

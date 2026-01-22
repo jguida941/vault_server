@@ -1,0 +1,41 @@
+{
+  "id": "ocean",
+  "name": "Ocean Blue",
+  "icon": "ocean",
+  "description": "Deep ocean-inspired blues",
+  "isDark": true,
+  "colors": {
+    "surface": "#001F2A",
+    "surfaceDim": "#001F2A",
+    "surfaceBright": "#2D4A55",
+    "surfaceContainerLowest": "#000000",
+    "surfaceContainerLow": "#001F2A",
+    "surfaceContainer": "#1A3640",
+    "surfaceContainerHigh": "#1A3640",
+    "surfaceContainerHighest": "#2D4A55",
+    "onSurface": "#CEECFB",
+    "onSurfaceVariant": "#95B5C4",
+    "primary": "#7AD0FF",
+    "onPrimary": "#003548",
+    "primaryContainer": "#004D67",
+    "onPrimaryContainer": "#C5E7FF",
+    "secondary": "#4DD0E1",
+    "onSecondary": "#00363D",
+    "secondaryContainer": "#004F58",
+    "onSecondaryContainer": "#B2EBF2",
+    "tertiary": "#4DD0E1",
+    "onTertiary": "#00363D",
+    "error": "#FFB4AB",
+    "onError": "#690005",
+    "outline": "#7A9AA8",
+    "outlineVariant": "#2D4A55",
+    "inverseSurface": "#CEECFB",
+    "inverseOnSurface": "#1A3640",
+    "inversePrimary": "#006688"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

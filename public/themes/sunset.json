@@ -1,0 +1,41 @@
+{
+  "id": "sunset",
+  "name": "Sunset Orange",
+  "icon": "sunset",
+  "description": "Warm sunset gradients",
+  "isDark": false,
+  "colors": {
+    "surface": "#FFFBFF",
+    "surfaceDim": "#F5DED6",
+    "surfaceBright": "#FFFBFF",
+    "surfaceContainerLowest": "#FFFFFF",
+    "surfaceContainerLow": "#FFEDE7",
+    "surfaceContainer": "#F5DED6",
+    "surfaceContainerHigh": "#F5DED6",
+    "surfaceContainerHighest": "#D8C2BA",
+    "onSurface": "#201A17",
+    "onSurfaceVariant": "#4D4541",
+    "primary": "#AA3100",
+    "onPrimary": "#FFFFFF",
+    "primaryContainer": "#FFDBD0",
+    "onPrimaryContainer": "#3B0800",
+    "secondary": "#755943",
+    "onSecondary": "#FFFFFF",
+    "secondaryContainer": "#FFDCC2",
+    "onSecondaryContainer": "#2B1708",
+    "tertiary": "#7E5700",
+    "onTertiary": "#FFFFFF",
+    "error": "#BA1A1A",
+    "onError": "#FFFFFF",
+    "outline": "#857A75",
+    "outlineVariant": "#D8C2BA",
+    "inverseSurface": "#362F2B",
+    "inverseOnSurface": "#FFEDE7",
+    "inversePrimary": "#FFB59C"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

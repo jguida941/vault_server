@@ -1,0 +1,41 @@
+{
+  "id": "forest",
+  "name": "Forest Green",
+  "icon": "forest",
+  "description": "Natural forest greens",
+  "isDark": true,
+  "colors": {
+    "surface": "#1A1C19",
+    "surfaceDim": "#1A1C19",
+    "surfaceBright": "#454843",
+    "surfaceContainerLowest": "#000000",
+    "surfaceContainerLow": "#1A1C19",
+    "surfaceContainer": "#2E312D",
+    "surfaceContainerHigh": "#2E312D",
+    "surfaceContainerHighest": "#454843",
+    "onSurface": "#DFE4DD",
+    "onSurfaceVariant": "#A8ACA6",
+    "primary": "#6EDD7B",
+    "onPrimary": "#003910",
+    "primaryContainer": "#00531A",
+    "onPrimaryContainer": "#8AFB96",
+    "secondary": "#B5CCB8",
+    "onSecondary": "#223526",
+    "secondaryContainer": "#384B3C",
+    "onSecondaryContainer": "#D1E8D4",
+    "tertiary": "#B5CCB8",
+    "onTertiary": "#223526",
+    "error": "#FFB4AB",
+    "onError": "#690005",
+    "outline": "#8D918B",
+    "outlineVariant": "#454843",
+    "inverseSurface": "#DFE4DD",
+    "inverseOnSurface": "#2E312D",
+    "inversePrimary": "#006E25"
+  },
+  "fonts": {
+    "brand": "'Google Sans', 'Segoe UI', Roboto, sans-serif",
+    "plain": "'Roboto', 'Segoe UI', system-ui, sans-serif",
+    "code": "'Roboto Mono', 'SF Mono', Consolas, monospace"
+  }
+}

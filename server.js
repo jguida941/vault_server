@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 8888;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Redirect root to working.html
+// Redirect root to v2.html
 app.get('/', (req, res) => {
-    res.redirect('/working.html');
+    res.redirect('/v2.html');
 });
 
 // YouTube API endpoint for fetching channel videos

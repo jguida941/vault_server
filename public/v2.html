@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="material-dark" data-theme-mode="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Vault - Ad-free YouTube music player">
+    <meta name="theme-color" content="#6750A4">
+
+    <title>The Vault - Music Player</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="src/styles/main.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236750A4'><path d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/></svg>">
+</head>
+<body>
+    <div id="app" class="app">
+        <!-- Header -->
+        <header class="app__header">
+            <nav class="app__nav container">
+                <div class="app__logo">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    The Vault
+                </div>
+
+                <div class="app__search">
+                    <input
+                        type="search"
+                        id="search-input"
+                        class="input-field__input"
+                        placeholder="Search videos... (press /)"
+                        aria-label="Search videos"
+                    >
+                </div>
+
+                <div class="app__actions">
+                    <button id="mode-toggle" class="btn btn--text" aria-label="Toggle private mode">
+                        <span class="btn__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></span>
+                        <span class="btn__text">Private</span>
+                    </button>
+
+                    <button id="view-toggle" class="btn btn--text" aria-label="Toggle view mode">
+                        <span class="btn__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg></span>
+                    </button>
+
+                    <button id="theme-btn" class="btn btn--text" aria-label="Change theme">
+                        <span class="btn__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mode Navigation -->
+            <div class="mode-nav container">
+                <button class="mode-nav__btn active" data-mode-btn="launcher">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    Home
+                </button>
+                <button class="mode-nav__btn" data-mode-btn="music">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    Music
+                </button>
+                <button class="mode-nav__btn" data-mode-btn="podcast">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"/></svg>
+                    Podcasts
+                </button>
+                <button class="mode-nav__btn" data-mode-btn="radio">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M3.24 6.15C2.51 6.43 2 7.17 2 8v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2H8.3l8.26-3.34L15.88 1 3.24 6.15zM7 20c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-8h-2v-2h-2v2H4V8h16v4z"/></svg>
+                    Radio
+                </button>
+                <button class="mode-nav__btn" data-mode-btn="settings">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                    Settings
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app__main">
+            <!-- Launcher Mode -->
+            <section data-mode="launcher" class="mode-section">
+                <div class="container">
+                    <div class="launcher">
+                        <div class="launcher__logo">
+                            <svg viewBox="0 0 24 24" width="80" height="80" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </div>
+                        <h1 class="launcher__title">THE VAULT</h1>
+                        <p class="launcher__subtitle">Your ad-free music player</p>
+
+                        <div class="launcher__stats">
+                            <div class="stat-card">
+                                <span class="stat-card__value" id="track-count">0</span>
+                                <span class="stat-card__label">Tracks</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-card__value" id="category-count">0</span>
+                                <span class="stat-card__label">Categories</span>
+                            </div>
+                        </div>
+
+                        <div class="launcher__actions">
+                            <button class="btn btn--filled btn--large launcher__btn" data-mode-btn="music">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                Start Listening
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Music Mode -->
+            <section data-mode="music" class="mode-section" style="display: none;">
+                <div class="container">
+                    <!-- Music Header -->
+                    <div class="music-header">
+                        <h1 class="music-header__title">Your Library</h1>
+                        <p class="music-header__subtitle">Browse and play your saved tracks</p>
+                    </div>
+
+                    <!-- Add Video -->
+                    <div class="add-video">
+                        <div class="input-field" style="flex: 1;">
+                            <input
+                                type="text"
+                                id="video-input"
+                                class="input-field__input"
+                                placeholder="Paste YouTube URL or video ID..."
+                            >
+                        </div>
+                        <button id="add-video-btn" class="btn btn--outlined add-video__btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                            Add
+                        </button>
+                    </div>
+
+                    <!-- Categories -->
+                    <div id="category-pills" class="category-pills"></div>
+
+                    <!-- Video Grid -->
+                    <div id="video-grid" class="video-grid grid grid--auto"></div>
+                </div>
+            </section>
+
+            <!-- Podcast Mode -->
+            <section data-mode="podcast" class="mode-section" style="display: none;">
+                <div class="container">
+                    <h2>Podcasts</h2>
+                    <p>Coming soon - Podcast mode with episode tracking</p>
+                </div>
+            </section>
+
+            <!-- Radio Mode -->
+            <section data-mode="radio" class="mode-section" style="display: none;">
+                <div class="container">
+                    <h2>Radio</h2>
+                    <p>Coming soon - Live radio streams</p>
+                </div>
+            </section>
+
+            <!-- Settings Mode -->
+            <section data-mode="settings" class="mode-section" style="display: none;">
+                <div class="container">
+                    <h2>Settings</h2>
+
+                    <!-- Theme Selection -->
+                    <div class="settings-section">
+                        <h3>Theme</h3>
+                        <div id="theme-grid" class="theme-grid"></div>
+                    </div>
+
+                    <!-- Data Management -->
+                    <div class="settings-section">
+                        <h3>Data</h3>
+                        <div class="settings-actions">
+                            <button id="export-btn" class="btn btn--outlined">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+                                Export Collection
+                            </button>
+                            <button id="import-btn" class="btn btn--outlined">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Import Collection
+                            </button>
+                            <button id="clear-btn" class="btn btn--outlined btn--danger">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                Clear Vault
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Drop Zone Overlay -->
+        <div class="drop-zone">
+            <div class="drop-zone__content">
+                <span class="drop-zone__icon">
+                    <svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                </span>
+                <span class="drop-zone__text">Drop JSON file to import</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Styles -->
+    <style>
+        /* Mode Navigation */
+        .mode-nav {
+            display: flex;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            overflow-x: auto;
+        }
+
+        .mode-nav__btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            background: none;
+            border: none;
+            border-radius: var(--md-sys-shape-corner-full);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all var(--md-sys-motion-duration-short3);
+        }
+
+        .mode-nav__btn:hover {
+            background-color: var(--md-sys-color-surface-container-high);
+        }
+
+        .mode-nav__btn.active {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        /* Launcher */
+        .launcher {
+            text-align: center;
+            padding: 64px 24px;
+        }
+
+        .launcher__title {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .launcher__subtitle {
+            font-size: 1.25rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 48px;
+        }
+
+        .launcher__stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .stat-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 48px;
+            background-color: var(--md-sys-color-surface-container);
+            border-radius: var(--md-sys-shape-corner-large);
+        }
+
+        .stat-card__value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--md-sys-color-primary);
+        }
+
+        .stat-card__label {
+            font-size: 0.875rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* Add Video */
+        .add-video {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        /* Settings */
+        .settings-section {
+            margin-bottom: 48px;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 16px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .settings-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Drop Zone */
+        .drop-zone {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+
+        .drag-active .drop-zone {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drop-zone__content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 48px;
+            background-color: var(--md-sys-color-surface-container);
+            border: 2px dashed var(--md-sys-color-primary);
+            border-radius: var(--md-sys-shape-corner-extra-large);
+        }
+
+        .drop-zone__icon {
+            font-size: 4rem;
+        }
+
+        .drop-zone__text {
+            font-size: 1.25rem;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 64px 24px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .empty-state__hint {
+            margin-top: 8px;
+            font-size: 0.875rem;
+        }
+
+        /* Video Grid/List */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Theme Grid */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        /* Theme Card */
+        .theme-card {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            background: var(--md-sys-color-surface-container);
+            border: 2px solid transparent;
+            border-radius: var(--md-sys-shape-corner-large);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--md-sys-motion-duration-short3);
+            text-align: left;
+        }
+
+        .theme-card:hover {
+            background: var(--md-sys-color-surface-container-high);
+            transform: translateY(-2px);
+            box-shadow: var(--md-sys-elevation-level2);
+        }
+
+        .theme-card--active {
+            border-color: var(--md-sys-color-primary);
+            background: var(--md-sys-color-primary-container);
+        }
+
+        .theme-card__preview {
+            height: 80px;
+            width: 100%;
+        }
+
+        .theme-card__content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 12px 16px;
+        }
+
+        .theme-card__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            margin-bottom: 4px;
+            color: var(--md-sys-color-primary);
+        }
+
+        .theme-card__icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .theme-card__name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .theme-card__desc {
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .theme-card__mode {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .theme-card__mode svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* App Logo */
+        .app__logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--md-sys-color-primary);
+        }
+
+        .app__logo svg {
+            color: var(--md-sys-color-primary);
+        }
+
+        /* Buttons with icons */
+        .btn svg {
+            flex-shrink: 0;
+        }
+
+        .btn--filled svg,
+        .btn--outlined svg {
+            margin-right: 8px;
+        }
+
+        /* Danger button */
+        .btn--danger {
+            color: var(--md-sys-color-error) !important;
+            border-color: var(--md-sys-color-error) !important;
+        }
+
+        .btn--danger:hover {
+            background-color: rgba(186, 26, 26, 0.08);
+        }
+
+        /* Mode nav icons */
+        .mode-nav__btn svg {
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        /* Drop zone icon */
+        .drop-zone__icon svg {
+            color: var(--md-sys-color-primary);
+        }
+
+        /* ============= Fullscreen Player Overlay ============= */
+        #fullscreen-player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .player-overlay__header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+            z-index: 500;
+        }
+
+        .player-overlay__info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .player-overlay__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .player-overlay__index {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .player-overlay__controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-overlay__btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .player-overlay__btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .player-overlay__close {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #e53935;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: 8px;
+        }
+
+        .player-overlay__close:hover {
+            background: #c62828;
+        }
+
+        .player-overlay__video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: opacity 0.3s, filter 0.3s;
+        }
+
+        .player-overlay__video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .player-overlay__video--dimmed {
+            opacity: 0.3;
+            filter: blur(8px);
+        }
+
+        /* ============= Player Queue Sidebar ============= */
+        .player-queue {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.98);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .player-queue--open {
+            transform: translateX(0);
+        }
+
+        .player-queue__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .player-queue__header h3 {
+            color: #fff;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .player-queue__header span {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.875rem;
+        }
+
+        .player-queue__list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+
+        .queue-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .queue-item:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .queue-item--active {
+            background: rgba(103, 80, 164, 0.25);
+            border-left: 3px solid #6750A4;
+        }
+
+        .queue-item img {
+            width: 56px;
+            height: 42px;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .queue-item__info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .queue-item__title {
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+
+        .queue-item__category,
+        .queue-item__artist {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.75rem;
+        }
+
+        .queue-item__drag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            margin-right: 8px;
+            color: rgba(255,255,255,0.3);
+            cursor: grab;
+            flex-shrink: 0;
+        }
+
+        .queue-item__drag:hover {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .queue-item__drag:active {
+            cursor: grabbing;
+        }
+
+        .queue-item--dragging {
+            opacity: 0.5;
+            background: rgba(103, 80, 164, 0.3) !important;
+        }
+
+        .queue-item--dragover {
+            border-top: 2px solid var(--md-sys-color-primary, #6750A4);
+            margin-top: -2px;
+        }
+
+        /* ============= Visualizer Canvas ============= */
+        .player-visualizer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            display: none;
+        }
+
+        .player-visualizer--active {
+            display: block;
+        }
+
+        /* ============= Visualizer Dropdown ============= */
+        .visualizer-dropdown {
+            position: relative;
+        }
+
+        .visualizer-dropdown__menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 8px 0;
+            min-width: 150px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            z-index: 1000;
+        }
+
+        .visualizer-dropdown__menu--open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .visualizer-dropdown__item {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            text-align: left;
+            font-size: 0.875rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .visualizer-dropdown__item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .visualizer-dropdown__item.active {
+            color: #BB86FC;
+            font-weight: 600;
+        }
+
+        .visualizer-dropdown__off {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 8px;
+            padding-top: 10px;
+            color: #ff5252;
+        }
+
+        /* ============= Improved Launcher ============= */
+        .launcher__logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .launcher__logo svg {
+            color: var(--md-sys-color-primary);
+            filter: drop-shadow(0 4px 20px var(--md-sys-color-primary));
+        }
+
+        .launcher__title {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            color: var(--md-sys-color-primary);
+        }
+
+        .launcher__btn {
+            padding: 16px 48px;
+            font-size: 1.125rem;
+            gap: 12px;
+        }
+
+        /* ============= Improved Category Pills ============= */
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 16px 0;
+            margin-bottom: 16px;
+        }
+
+        .category-pill {
+            height: 40px;
+            padding: 0 20px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: 20px;
+            border: 2px solid var(--md-sys-color-outline-variant);
+            background: transparent;
+            color: var(--md-sys-color-on-surface);
+            transition: all 0.2s;
+        }
+
+        .category-pill:hover {
+            border-color: var(--md-sys-color-primary);
+            background: rgba(103, 80, 164, 0.1);
+        }
+
+        .category-pill--active {
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border-color: var(--md-sys-color-primary);
+        }
+
+        .category-pill--active:hover {
+            background: var(--md-sys-color-primary);
+        }
+
+        /* Add category button */
+        .category-pills .btn--text {
+            height: 40px;
+            padding: 0 16px;
+            border: 2px dashed var(--md-sys-color-outline-variant);
+            border-radius: 20px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .category-pills .btn--text:hover {
+            border-color: var(--md-sys-color-primary);
+            background: rgba(103, 80, 164, 0.1);
+        }
+
+        /* ============= Music Section Header ============= */
+        .music-header {
+            margin-bottom: 24px;
+        }
+
+        .music-header__title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: 8px;
+        }
+
+        .music-header__subtitle {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* ============= Add Video Button ============= */
+        .add-video__btn {
+            height: 48px;
+            padding: 0 24px;
+            gap: 8px;
+            white-space: nowrap;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+        }
+
+        .add-video__btn:hover {
+            background: var(--md-sys-color-primary);
+            filter: brightness(1.1);
+            box-shadow: 0 4px 12px rgba(103, 80, 164, 0.4);
+        }
+
+        .add-video__btn svg {
+            flex-shrink: 0;
+        }
+
+        /* Private toggle */
+        .private-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--md-sys-shape-corner-small);
+            cursor: pointer;
+            transition: all var(--md-sys-motion-duration-short3);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .private-toggle:hover {
+            background: var(--md-sys-color-surface-container-high);
+        }
+
+        .private-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .private-toggle__icon {
+            opacity: 0.5;
+            transition: all var(--md-sys-motion-duration-short3);
+        }
+
+        .private-toggle__label {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .private-toggle:has(input:checked) {
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        .private-toggle:has(input:checked) .private-toggle__icon {
+            opacity: 1;
+        }
+
+        /* Fix category add button */
+        .category-pills .btn--text {
+            height: 40px;
+            padding: 0 16px;
+            border: 2px dashed var(--md-sys-color-outline-variant) !important;
+            border-radius: 20px;
+            color: var(--md-sys-color-on-surface-variant);
+            background: transparent !important;
+        }
+
+        /* ============= Private Mode Toggle ============= */
+        #mode-toggle {
+            transition: all 0.2s;
+        }
+
+        #mode-toggle.active {
+            background: var(--md-sys-color-tertiary);
+            color: var(--md-sys-color-on-tertiary);
+        }
+
+        #mode-toggle.active svg {
+            color: var(--md-sys-color-on-tertiary);
+        }
+
+        /* ============= Edit Video Modal ============= */
+        .edit-video-form .input-field__label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .edit-video-form select {
+            width: 100%;
+            background: var(--md-sys-color-surface-container);
+            color: var(--md-sys-color-on-surface);
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 8px;
+        }
+
+        /* ============= Modal Buttons ============= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 40px;
+            padding: 0 24px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn--filled {
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .btn--filled:hover {
+            background: var(--md-sys-color-primary);
+            filter: brightness(1.1);
+            box-shadow: 0 2px 8px rgba(103, 80, 164, 0.4);
+        }
+
+        .btn--text {
+            background: transparent;
+            color: var(--md-sys-color-primary);
+        }
+
+        .btn--text:hover {
+            background: rgba(103, 80, 164, 0.1);
+        }
+
+        .btn--outlined {
+            background: transparent;
+            color: var(--md-sys-color-primary);
+            border: 1px solid var(--md-sys-color-outline);
+        }
+
+        .btn--outlined:hover {
+            background: rgba(103, 80, 164, 0.08);
+        }
+    </style>
+
+    <!-- App Script -->
+    <script type="module" src="src/app.js"></script>
+
+    <!-- Mode Navigation Handler -->
+    <script>
+        document.querySelectorAll('[data-mode-btn]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const mode = btn.dataset.modeBtn;
+
+                // Update active button
+                document.querySelectorAll('[data-mode-btn]').forEach(b => {
+                    b.classList.toggle('active', b.dataset.modeBtn === mode);
+                });
+
+                // Show/hide sections
+                document.querySelectorAll('[data-mode]').forEach(section => {
+                    section.style.display = section.dataset.mode === mode ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Theme button
+        document.getElementById('theme-btn')?.addEventListener('click', () => {
+            document.querySelector('[data-mode-btn="settings"]')?.click();
+        });
+
+        // Export button
+        document.getElementById('export-btn')?.addEventListener('click', () => {
+            import('./src/app.js').then(app => app.exportCollection());
+        });
+
+        // Clear button
+        document.getElementById('clear-btn')?.addEventListener('click', () => {
+            import('./src/app.js').then(app => app.clearCollection());
+        });
+    </script>
+</body>
+</html>
