@@ -88,6 +88,8 @@ After starting, open http://localhost:8888 in your browser.
 - Or drag and drop a JSON file anywhere
 
 ### Themes
+![Theme Selection](img/themes.png)
+
 The Vault includes 10 professional themes loaded from JSON files:
 - Material Dark/Light
 - Ocean Blue
@@ -98,8 +100,6 @@ The Vault includes 10 professional themes loaded from JSON files:
 - Midnight Purple
 - Minimal Mono
 - Warm Amber
-
-![Theme Selection](img/themes.png)
 
 Change themes in the Settings section. You can also create custom themes by adding JSON files to `/public/themes/`.
 
