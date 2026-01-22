@@ -90,7 +90,7 @@ After starting, open http://localhost:8888 in your browser.
 ## Themes
 ![Theme Selection](img/themes.png)
 
-The Vault includes 10 professional themes loaded from JSON files:
+**The Vault includes 10 professional themes loaded from JSON files:**
 - Material Dark/Light
 - Ocean Blue
 - Forest Green
@@ -107,7 +107,7 @@ Change themes in the Settings section. You can also create custom themes by addi
 
 ![Full-Screen Player](img/player-queue.png)
 
-The full-screen player includes:
+**The full-screen player includes:**
 - Drag-to-reorder queue
 - 5 visualizer modes
 - Shuffle playback
