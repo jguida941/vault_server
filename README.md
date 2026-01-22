@@ -80,6 +80,8 @@ After starting, open http://localhost:8888 in your browser.
 - Go to Settings > Import Collection
 - Or drag and drop a JSON file anywhere
 
+![Library](img/library.png)
+
 ### Themes
 The Vault includes 10 professional themes loaded from JSON files:
 - Material Dark/Light
@@ -98,7 +100,7 @@ Change themes in the Settings section. You can also create custom themes by addi
 
 ### Player & Queue
 
-![Full-Screen Player](img/player.png)
+![Full-Screen Player](img/player-queue.png)
 
 The full-screen player includes:
 - Drag-to-reorder queue
@@ -106,7 +108,7 @@ The full-screen player includes:
 - Shuffle playback
 - Keyboard shortcuts
 
-![Queue Sidebar](img/queue.png)
+![Queue Sidebar](img/player-queue.png)
 
 ### Private Mode
 - Toggle the lock icon in the header
