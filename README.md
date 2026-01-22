@@ -3,9 +3,7 @@
 **The Vault** is a private, server-based music player that turns YouTube into your personal, ad-free library.   
 It runs as a Node.js server with an HTML frontend, allowing you to curate, organize, and play your tracks without ads, tracking, or interruptions.
 
-## Screenshots
-
-### Home
+## Home Screen
 ![The Vault Home](img/home.png)
 
 ## Features
@@ -61,14 +59,17 @@ After starting, open http://localhost:8888 in your browser.
 
 ## Usage
 
-### Adding Videos
+### Library
+![Library](img/library.png)
+
+#### Adding Videos
 1. Paste a YouTube URL or video ID in the input field
 2. Click "Add Video"
 3. Enter a title when prompted
 4. Choose a category
 5. Optionally mark as private
 
-### Managing Your Collection
+#### Managing Your Collection
 
 **Categories**
 - Filter videos by clicking category pills
@@ -83,9 +84,6 @@ After starting, open http://localhost:8888 in your browser.
 - Go to Settings > Import Collection
 - Or drag and drop a JSON file anywhere
 
-#### Library
-![Library](img/library.png)
-
 ### Themes
 The Vault includes 10 professional themes loaded from JSON files:
 - Material Dark/Light
@@ -98,14 +96,12 @@ The Vault includes 10 professional themes loaded from JSON files:
 - Minimal Mono
 - Warm Amber
 
-#### Theme Gallery
 ![Theme Selection](img/themes.png)
 
 Change themes in the Settings section. You can also create custom themes by adding JSON files to `/public/themes/`.
 
 ### Player & Queue
 
-#### Full-Screen Player
 ![Full-Screen Player](img/player-queue.png)
 
 The full-screen player includes:
