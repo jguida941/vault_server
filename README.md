@@ -103,7 +103,7 @@ The Vault includes 10 professional themes loaded from JSON files:
 
 Change themes in the Settings section. You can also create custom themes by adding JSON files to `/public/themes/`.
 
-### Player & Queue
+## Player & Queue
 
 ![Full-Screen Player](img/player-queue.png)
 
