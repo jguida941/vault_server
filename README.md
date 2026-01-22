@@ -1,6 +1,7 @@
 # The Vault - Your Personal Music Library
 
-**The Vault** is a private, server-based music player that turns YouTube into your personal, ad-free library. It runs as a Node.js server with an HTML frontend, allowing you to curate, organize, and play your tracks without ads, tracking, or interruptions.
+**The Vault** is a private, server-based music player that turns YouTube into your personal, ad-free library.   
+It runs as a Node.js server with an HTML frontend, allowing you to curate, organize, and play your tracks without ads, tracking, or interruptions.
 
 ![The Vault Home](img/home.png)
 
