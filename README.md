@@ -8,20 +8,22 @@ It runs as a Node.js server with an HTML frontend, allowing you to curate, organ
 
 ## Features
 
-- **Ad-free YouTube playback** using youtube-nocookie.com embeds
-- **No tracking or analytics** - privacy first
-- **Add videos by URL or video ID** with title, artist, category, and privacy settings
-- **10 Professional themes** with Material Design 3 styling
-- **Video categorization system** (Hip Hop, Rock, Electronic, Chill, custom categories)
-- **Full-screen player** with queue sidebar and playback controls
-- **5 Visualizer modes** - Bars, Wave, Particles, Sphere, Kaleidoscope
-- **Auto-play** with shuffle and repeat options
-- **Edit/delete videos** with modal editor
-- **LocalStorage persistence** with automatic cleanup
-- **Save/load collections** as JSON files
-- **Public/Private mode** toggle for hidden videos
-- **Responsive design** with grid/list view
-- **Keyboard shortcuts** for quick navigation
+| Feature | Details |
+| --- | --- |
+| Ad-free YouTube playback | Uses `youtube-nocookie.com` embeds |
+| Privacy-first | No tracking or analytics |
+| Add videos | By URL or video ID with title, artist, category, and privacy settings |
+| Themes | 10 professional themes with Material Design 3 styling |
+| Categorization | Hip Hop, Rock, Electronic, Chill, custom categories |
+| Full-screen player | Queue sidebar and playback controls |
+| Visualizers | 5 modes: Bars, Wave, Particles, Sphere, Kaleidoscope |
+| Auto-play | Shuffle and repeat options |
+| Video editing | Edit/delete videos with modal editor |
+| Persistence | LocalStorage with automatic cleanup |
+| Collections | Save/load as JSON files |
+| Private mode | Public/Private toggle for hidden videos |
+| Responsive layout | Grid/list view |
+| Keyboard shortcuts | Quick navigation |
 
 ## Quick Start
 
