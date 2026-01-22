@@ -57,10 +57,11 @@ npm stop           # Stop server
 
 After starting, open http://localhost:8888 in your browser.
 
-## Usage
 
-### Library
+## Library
 ![Library](img/library.png)
+
+## Usage
 
 #### Adding Videos
 1. Paste a YouTube URL or video ID in the input field
