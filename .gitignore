@@ -46,6 +46,7 @@ gen/
 
 # Project planning files (private)
 AUDIT.md
+docs/
 *vault*phases*
 *roadmap*
 vault_phases*
